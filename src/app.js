@@ -41,6 +41,8 @@ function bindEvents() {
     button.addEventListener("click", () => showView(button.dataset.view));
   });
 
+  $("#startCheckBtn").addEventListener("click", () => showView("assess"));
+
   $("#saveAssessmentBtn").addEventListener("click", () => {
     readAssessmentForm();
     saveState();
@@ -108,6 +110,7 @@ function render() {
   const coach = buildCoachCopy(appState, score, plan);
 
   $("#personaSelect").value = appState.id;
+  renderHero(score);
   renderScore(score);
   renderAssessmentForm();
   renderAlerts(score.alerts);
@@ -115,7 +118,17 @@ function render() {
   renderTodayFocus(score, plan);
   renderWorkout(plan);
   renderProgress(history);
+  renderProgressStory(history, score);
   renderCoach(coach);
+}
+
+function renderHero(score) {
+  const firstName = appState.name.split(",")[0];
+  const lowest = Object.entries(score.subScores).sort((a, b) => a[1] - b[1])[0][0];
+  const supervised = score.status.shouldSupervise ? "with support nearby" : "at your own pace";
+  $("#greetingEyebrow").textContent = `Good morning, ${firstName}`;
+  $("#heroTitle").textContent = getHeroTitle(score.band);
+  $("#heroMessage").textContent = `Today's plan focuses on ${labelDomain(lowest)} ${supervised}. Your wearable trend and movement checks set the workout level.`;
 }
 
 function renderScore(score) {
@@ -175,6 +188,9 @@ function renderWorkout(plan) {
   $("#planLevel").textContent = plan.label;
   $("#workoutPlan").innerHTML = `
     <article class="panel workout-intro">
+      <div class="exercise-visual featured-visual ${visualClassFor(plan.exercises[0]?.name || "")}" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
       <h3>${plan.label}</h3>
       <p>${plan.support}</p>
       <p class="muted">${plan.progression}</p>
@@ -183,6 +199,9 @@ function renderWorkout(plan) {
       .map(
         (exercise) => `
           <article class="panel exercise-card">
+            <div class="exercise-visual ${visualClassFor(exercise.name)}" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
             <span class="exercise-kicker">${exercise.dose}</span>
             <h3>${exercise.name}</h3>
             <p>${exercise.coaching}</p>
@@ -191,6 +210,23 @@ function renderWorkout(plan) {
       )
       .join("")}
   `;
+}
+
+function renderProgressStory(history, score) {
+  const first = history[0];
+  const last = history[history.length - 1];
+  const scoreDelta = last.score - first.score;
+  const tugGain = round1(first.tugSeconds - last.tugSeconds);
+  const chairGain = last.chairStands - first.chairStands;
+  $("#progressStory").innerHTML = `
+    <div>
+      <p class="eyebrow">Coach insight</p>
+      <h3>${scoreDelta > 0 ? `${signed(scoreDelta)} points over the last four weeks` : "Build momentum safely this week"}</h3>
+      <p>${tugGain > 0 ? `Movement is trending better: TUG is ${tugGain}s faster and chair stands are ${signed(chairGain)} reps.` : score.explanation}</p>
+    </div>
+    <button class="secondary-action story-action" type="button" data-view-target="progress">View trend</button>
+  `;
+  $("#progressStory .story-action").addEventListener("click", () => showView("progress"));
 }
 
 function renderProgress(history) {
@@ -279,9 +315,11 @@ function readAssessmentForm() {
 }
 
 function showView(view) {
+  $(".app-shell")?.setAttribute("data-view", view);
   $$(".tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.view === view));
   $$(".view").forEach((panel) => panel.classList.toggle("is-visible", panel.id === `view-${view}`));
   $("#main").focus({ preventScroll: true });
+  $(".phone-screen")?.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function loadState() {
@@ -321,4 +359,34 @@ function signed(value) {
 
 function round1(value) {
   return Math.round(value * 10) / 10;
+}
+
+function getHeroTitle(band) {
+  return {
+    seated: "Start with steady seated movement",
+    frail: "Build confidence with supported strength",
+    frailFallRisk: "Balance work, safely supported",
+    prefrail: "A short session to move better today",
+    robust: "Keep strength and balance moving up",
+    advanced: "Train hard, recover smart"
+  }[band];
+}
+
+function labelDomain(key) {
+  return {
+    mobility: "mobility",
+    strength: "leg strength",
+    balance: "balance",
+    activity: "daily activity",
+    recovery: "recovery"
+  }[key] || key;
+}
+
+function visualClassFor(name) {
+  const normalized = name.toLowerCase();
+  if (normalized.includes("walk") || normalized.includes("march") || normalized.includes("step")) return "visual-walk";
+  if (normalized.includes("balance") || normalized.includes("tandem") || normalized.includes("weight")) return "visual-balance";
+  if (normalized.includes("push") || normalized.includes("row")) return "visual-upper";
+  if (normalized.includes("carry")) return "visual-carry";
+  return "visual-stand";
 }

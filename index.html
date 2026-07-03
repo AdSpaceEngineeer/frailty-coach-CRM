@@ -6,12 +6,15 @@
     <meta name="theme-color" content="#0b5c5a" />
     <title>Frailty Coach</title>
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=6" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Frailty Coach navigation">
+    <div class="device-stage">
+      <div class="phone-frame" aria-label="Frailty Coach mobile app preview">
+        <div class="phone-screen">
+          <div class="app-shell" data-view="today">
+            <aside class="sidebar" aria-label="Frailty Coach navigation">
         <div class="brand-block">
           <div class="brand-mark" aria-hidden="true">FC</div>
           <div>
@@ -25,33 +28,39 @@
           <select id="personaSelect"></select>
         </label>
 
-        <nav class="tabs" aria-label="Primary">
-          <button class="tab is-active" data-view="today" type="button">Today</button>
-          <button class="tab" data-view="assess" type="button">Assess</button>
-          <button class="tab" data-view="plan" type="button">Workout</button>
-          <button class="tab" data-view="progress" type="button">Progress</button>
-          <button class="tab" data-view="coach" type="button">Coach</button>
-        </nav>
-
         <div class="safety-note">
           <strong>Not a diagnosis.</strong>
           Stop exercise for chest pain, faintness, severe breathlessness, new weakness, or sharp pain.
         </div>
-      </aside>
+            </aside>
 
-      <main id="main" class="main" tabindex="-1">
-        <section class="topbar" aria-label="Current score summary">
-          <div>
-            <p class="eyebrow">Function Resilience Score</p>
-            <div class="score-line">
-              <span id="scoreValue">--</span>
-              <span id="scoreBand">Loading</span>
+            <main id="main" class="main" tabindex="-1">
+        <section class="topbar coach-hero" aria-label="Current coach summary">
+          <div class="hero-copy">
+            <p id="greetingEyebrow" class="eyebrow">Good morning</p>
+            <h2 id="heroTitle">Ready when you are</h2>
+            <p id="heroMessage" class="hero-message"></p>
+            <div class="hero-actions">
+              <button id="startCheckBtn" class="primary-action" type="button">Start guided check</button>
+              <button id="demoProgressBtn" class="secondary-action" type="button">Run 4-week demo</button>
             </div>
           </div>
-          <div class="score-meter" aria-hidden="true">
-            <div id="scoreFill"></div>
+          <div class="hero-score-card">
+            <div class="score-line">
+              <span id="scoreValue">--</span>
+              <span>Function score</span>
+            </div>
+            <div class="score-meter" aria-hidden="true">
+              <div id="scoreFill"></div>
+            </div>
+            <strong id="scoreBand">Loading</strong>
+            <div class="movement-scene" aria-hidden="true">
+              <span class="motion-line line-one"></span>
+              <span class="motion-line line-two"></span>
+              <span class="motion-person"></span>
+              <span class="motion-support"></span>
+            </div>
           </div>
-          <button id="demoProgressBtn" class="primary-action" type="button">Run 4-week demo</button>
         </section>
 
         <section id="view-today" class="view is-visible" aria-labelledby="todayTitle">
@@ -64,6 +73,7 @@
           </div>
 
           <div id="alerts" class="alert-stack" aria-live="polite"></div>
+          <article id="progressStory" class="story-card" aria-live="polite"></article>
 
           <div class="dashboard-grid">
             <article class="panel score-panel">
@@ -108,6 +118,24 @@
               <h2 id="assessTitle">Update function checks</h2>
             </div>
             <button id="saveAssessmentBtn" class="primary-action" type="button">Save assessment</button>
+          </div>
+
+          <div class="assessment-steps" aria-label="Assessment flow">
+            <article>
+              <span>01</span>
+              <strong>Safety first</strong>
+              <p>Confirm red flags and support needs before movement.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Move with guidance</strong>
+              <p>Use the timer and rep counter for quick functional checks.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Adapt the plan</strong>
+              <p>Refresh the score and workout level from today's results.</p>
+            </article>
           </div>
 
           <div class="assessment-grid">
@@ -218,10 +246,35 @@
             </article>
           </div>
         </section>
-      </main>
+            </main>
+            <nav class="tabs bottom-tabs" aria-label="Primary">
+              <button class="tab is-active" data-view="today" type="button">
+                <span class="nav-icon nav-today" aria-hidden="true"></span>
+                <span>Today</span>
+              </button>
+              <button class="tab" data-view="assess" type="button">
+                <span class="nav-icon nav-assess" aria-hidden="true"></span>
+                <span>Assess</span>
+              </button>
+              <button class="tab" data-view="plan" type="button">
+                <span class="nav-icon nav-plan" aria-hidden="true"></span>
+                <span>Workout</span>
+              </button>
+              <button class="tab" data-view="progress" type="button">
+                <span class="nav-icon nav-progress" aria-hidden="true"></span>
+                <span>Progress</span>
+              </button>
+              <button class="tab" data-view="coach" type="button">
+                <span class="nav-icon nav-coach" aria-hidden="true"></span>
+                <span>Coach</span>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="./src/app.js?v=6"></script>
   </body>
 </html>
