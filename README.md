@@ -15,6 +15,7 @@ Frailty Coach helps older adults safely assess their physical resilience, unders
 - **Guided frailty and fall-risk checks**: safety screen, fall-risk questions, Timed Up and Go, chair stands, balance stage, gait speed, and measurement confidence.
 - **Adaptive daily workout plans**: exercises matched to ability level, with setup, action, and safety cues on every workout card.
 - **Guided Companion visual design**: a warm elder-friendly interface with deep green navigation, ivory surfaces, large controls, and app-ready wellness illustrations.
+- **Coach avatar preference**: users can choose a female or male East Asian coach avatar, with the selected visual style applied to the hero and workout artwork.
 - **Wearable-style insights**: uses steps, active minutes, sleep, resting heart rate, walking speed, and recovery signals to adjust recommendations.
 - **Safety-aware coaching**: flags red-flag symptoms, fall-risk concerns, poor recovery, and missed sessions, then recommends supervision or deloading when needed.
 - **Progress tracking**: interprets changes in score, TUG time, chair stands, and balance stage, then points the user back to the next useful action.
@@ -42,7 +43,7 @@ The intended loop is:
 - **Assess**: guided safety, fall-risk, and functional checks with expandable instructions for how to run each check.
 - **Workout**: the adaptive daily exercise plan for the user’s current ability band, with setup, action, and watch-out cues.
 - **Progress**: trend view showing how score and functional metrics change over time, plus a plain-language interpretation of what to do next.
-- **Coach**: plain-language summaries for the older adult and caregiver/PT, plus the optional app walkthrough and Evidence & Sources disclosure.
+- **Coach**: plain-language summaries for the older adult and caregiver/PT, coach avatar preference, plus the optional app walkthrough and Evidence & Sources disclosure.
 
 ## Scientific Positioning
 
@@ -57,11 +58,18 @@ The current app uses the **Guided Companion** direction from the saved mockups i
 Generated app assets live in `assets/illustrations/`:
 
 - `coach-avatar.png`
+- `coach-avatar-female-east-asian.png`
+- `coach-avatar-male-east-asian.png`
 - `progress-success.png`
 - `supported-sit-to-stand.png`
 - `weight-shifts.png`
 - `wall-pushups.png`
 - `hallway-walk.png`
+- `male-progress-success.png`
+- `male-supported-sit-to-stand.png`
+- `male-weight-shifts.png`
+- `male-wall-pushups.png`
+- `male-hallway-walk.png`
 
 These are project assets used by the app, not just design references. Keep future exercise artwork consistent with this style: warm ivory background, deep green clothing/actions, soft home setting, rounded digital-health illustration, and no diagnostic claims inside the image.
 

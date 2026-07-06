@@ -2003,7 +2003,27 @@ body {
   margin: 1rem 0;
 }
 
-.summary-toggle {
+.avatar-choice {
+  align-items: center;
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  margin: 0.9rem 0 0;
+  padding: 0.55rem;
+}
+
+.avatar-choice span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.summary-toggle,
+.avatar-toggle {
   background: #fffdf8;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -2014,7 +2034,13 @@ body {
   padding: 0.6rem;
 }
 
-.summary-toggle.is-active {
+.avatar-toggle {
+  min-height: 2.35rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.summary-toggle.is-active,
+.avatar-toggle.is-active {
   background: var(--teal);
   border-color: var(--teal);
   color: white;
@@ -2026,6 +2052,16 @@ body {
 
 .summary-panel.is-visible {
   display: block;
+}
+
+@media (max-width: 640px) {
+  .avatar-choice {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .avatar-choice span {
+    grid-column: 1 / -1;
+  }
 }
 
 .bottom-tabs {

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0b5c5a" />
     <title>Frailty Coach</title>
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css?v=12" />
+    <link rel="stylesheet" href="./styles.css?v=13" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -68,6 +68,7 @@
               <div id="scoreFill"></div>
             </div>
             <img
+              id="heroIllustration"
               class="hero-illustration"
               src="./assets/illustrations/progress-success.png"
               alt=""
@@ -291,10 +292,22 @@
           </div>
           <div class="coach-grid">
             <article class="panel coach-card span-2">
-              <img src="./assets/illustrations/coach-avatar.png" alt="" width="512" height="512" loading="lazy" />
+              <img
+                id="coachAvatarImage"
+                src="./assets/illustrations/coach-avatar-female-east-asian.png"
+                alt=""
+                width="512"
+                height="512"
+                loading="lazy"
+              />
               <div>
                 <h3>Your coach</h3>
                 <p class="muted">Supportive wellness guidance for safe movement and steady progress.</p>
+                <div class="avatar-choice" aria-label="Coach avatar preference">
+                  <span>Coach avatar</span>
+                  <button class="avatar-toggle is-active" data-avatar="female" type="button">Female</button>
+                  <button class="avatar-toggle" data-avatar="male" type="button">Male</button>
+                </div>
                 <div class="coach-tabs" role="tablist" aria-label="Summary audience">
                   <button class="summary-toggle is-active" data-summary="elder" type="button">For me</button>
                   <button class="summary-toggle" data-summary="caregiver" type="button">For caregiver</button>
@@ -381,6 +394,6 @@
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./src/app.js?v=12"></script>
+    <script type="module" src="./src/app.js?v=13"></script>
   </body>
 </html>

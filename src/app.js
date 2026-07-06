@@ -6,16 +6,36 @@ import {
   getWorkoutPlan,
   makeHistoryWithCurrent
 } from "./logic.js";
-import { fallQuestions, personas, safetyQuestions } from "./data.js?v=12";
+import { fallQuestions, personas, safetyQuestions } from "./data.js?v=13";
 
 const NORMAL_STORAGE_KEY = "frailty-coach-state-v2";
 const PRESENTER_STORAGE_KEY = "frailty-coach-presenter-state-v1";
+const AVATAR_STORAGE_KEY = "frailty-coach-avatar-preference-v1";
+const ASSET_SETS = {
+  female: {
+    coach: "./assets/illustrations/coach-avatar-female-east-asian.png",
+    progress: "./assets/illustrations/progress-success.png",
+    stand: "./assets/illustrations/supported-sit-to-stand.png",
+    balance: "./assets/illustrations/weight-shifts.png",
+    upper: "./assets/illustrations/wall-pushups.png",
+    walk: "./assets/illustrations/hallway-walk.png"
+  },
+  male: {
+    coach: "./assets/illustrations/coach-avatar-male-east-asian.png",
+    progress: "./assets/illustrations/male-progress-success.png",
+    stand: "./assets/illustrations/male-supported-sit-to-stand.png",
+    balance: "./assets/illustrations/male-weight-shifts.png",
+    upper: "./assets/illustrations/male-wall-pushups.png",
+    walk: "./assets/illustrations/male-hallway-walk.png"
+  }
+};
 const urlParams = new URLSearchParams(window.location.search);
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
 let presenterMode = urlParams.get("demo") === "1";
 let appState = loadState();
+let avatarPreference = loadAvatarPreference();
 let activeTimer = null;
 let timerStart = 0;
 
@@ -49,6 +69,9 @@ function bindEvents() {
   $("#evidenceLinkBtn").addEventListener("click", () => showEvidenceSources());
   $$(".summary-toggle").forEach((button) => {
     button.addEventListener("click", () => showSummary(button.dataset.summary));
+  });
+  $$(".avatar-toggle").forEach((button) => {
+    button.addEventListener("click", () => setAvatarPreference(button.dataset.avatar));
   });
 
   $("#saveAssessmentBtn").addEventListener("click", () => {
@@ -127,6 +150,8 @@ function render() {
 
   $("#personaSelect").value = appState.id;
   $(".app-shell")?.setAttribute("data-presenter-mode", presenterMode ? "true" : "false");
+  $(".app-shell")?.setAttribute("data-avatar", avatarPreference);
+  renderAvatarPreference();
   renderHero(score);
   renderScore(score);
   renderAssessmentForm();
@@ -147,6 +172,7 @@ function renderHero(score) {
   $("#greetingEyebrow").textContent = `Good morning, ${firstName}`;
   $("#heroTitle").textContent = getHeroTitle(score.band);
   $("#heroMessage").textContent = `Do today's workout ${supervised}. It focuses on ${labelDomain(lowest)}, using your latest movement checks and wearable trend.`;
+  $("#heroIllustration").src = currentAssets().progress;
 }
 
 function renderScore(score) {
@@ -328,8 +354,26 @@ function renderProgressInsight(history, score, plan) {
 }
 
 function renderCoach(coach) {
+  const coachImage = $("#coachAvatarImage");
+  coachImage.src = currentAssets().coach;
+  coachImage.alt = `${avatarPreference === "male" ? "Male" : "Female"} East Asian coach avatar`;
   $("#elderSummary").textContent = coach.elder;
   $("#caregiverSummary").textContent = coach.caregiver;
+}
+
+function renderAvatarPreference() {
+  $$(".avatar-toggle").forEach((button) => {
+    const isActive = button.dataset.avatar === avatarPreference;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function setAvatarPreference(value) {
+  avatarPreference = value === "male" ? "male" : "female";
+  localStorage.setItem(AVATAR_STORAGE_KEY, avatarPreference);
+  render();
+  toast(`${avatarPreference === "male" ? "Male" : "Female"} coach avatar selected`);
 }
 
 function showSummary(target) {
@@ -413,6 +457,10 @@ function loadState() {
     localStorage.removeItem(currentStorageKey());
   }
   return clonePersona("grace");
+}
+
+function loadAvatarPreference() {
+  return localStorage.getItem(AVATAR_STORAGE_KEY) === "male" ? "male" : "female";
 }
 
 function saveState() {
@@ -576,14 +624,19 @@ function visualClassFor(name) {
 }
 
 function exerciseImageFor(name) {
+  const assets = currentAssets();
   const normalized = name.toLowerCase();
-  if (normalized.includes("push") || normalized.includes("row")) return "./assets/illustrations/wall-pushups.png";
-  if (normalized.includes("walk") || normalized.includes("march")) return "./assets/illustrations/hallway-walk.png";
+  if (normalized.includes("push") || normalized.includes("row")) return assets.upper;
+  if (normalized.includes("walk") || normalized.includes("march") || normalized.includes("step")) return assets.walk;
   if (normalized.includes("balance") || normalized.includes("tandem") || normalized.includes("weight") || normalized.includes("tap")) {
-    return "./assets/illustrations/weight-shifts.png";
+    return assets.balance;
   }
   if (normalized.includes("heel") || normalized.includes("toe") || normalized.includes("calf")) {
-    return "./assets/illustrations/weight-shifts.png";
+    return assets.balance;
   }
-  return "./assets/illustrations/supported-sit-to-stand.png";
+  return assets.stand;
+}
+
+function currentAssets() {
+  return ASSET_SETS[avatarPreference] || ASSET_SETS.female;
 }
