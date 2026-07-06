@@ -1,12 +1,18 @@
-const CACHE_NAME = "frailty-coach-v7";
+const CACHE_NAME = "frailty-coach-v12";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=7",
+  "./styles.css?v=12",
   "./manifest.webmanifest",
-  "./src/app.js?v=7",
+  "./src/app.js?v=12",
   "./src/logic.js",
-  "./src/data.js"
+  "./src/data.js?v=12",
+  "./assets/illustrations/coach-avatar.png",
+  "./assets/illustrations/supported-sit-to-stand.png",
+  "./assets/illustrations/weight-shifts.png",
+  "./assets/illustrations/wall-pushups.png",
+  "./assets/illustrations/hallway-walk.png",
+  "./assets/illustrations/progress-success.png"
 ];
 
 self.addEventListener("install", (event) => {

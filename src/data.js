@@ -85,7 +85,7 @@ export const personas = {
       heartRecovery: 9,
       sleepHours: 5.7,
       sleepRegularity: 58,
-      source: "demo wearable"
+      source: "Synced wearable"
     },
     adherence: {
       completedThisWeek: 1,
@@ -137,7 +137,7 @@ export const personas = {
       heartRecovery: 16,
       sleepHours: 6.5,
       sleepRegularity: 72,
-      source: "demo wearable"
+      source: "Synced wearable"
     },
     adherence: {
       completedThisWeek: 3,
@@ -189,7 +189,7 @@ export const personas = {
       heartRecovery: 27,
       sleepHours: 7.4,
       sleepRegularity: 87,
-      source: "demo wearable"
+      source: "Synced wearable"
     },
     adherence: {
       completedThisWeek: 5,
@@ -241,7 +241,7 @@ export const personas = {
       heartRecovery: 35,
       sleepHours: 7.6,
       sleepRegularity: 91,
-      source: "demo wearable"
+      source: "Synced wearable"
     },
     adherence: {
       completedThisWeek: 5,

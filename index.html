@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0b5c5a" />
     <title>Frailty Coach</title>
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link rel="stylesheet" href="./styles.css?v=12" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -23,14 +23,24 @@
           </div>
         </div>
 
-        <label class="field compact-field" for="personaSelect">
-          <span>Demo persona</span>
-          <select id="personaSelect"></select>
-        </label>
+        <section id="presenterControls" class="presenter-controls" aria-label="Presenter controls" hidden>
+          <div>
+            <p class="eyebrow">Presenter controls</p>
+            <h2>Demo tools</h2>
+          </div>
+          <label class="field compact-field" for="personaSelect">
+            <span>Scenario</span>
+            <select id="personaSelect"></select>
+          </label>
+          <div class="presenter-actions">
+            <button id="demoProgressBtn" class="primary-action" type="button">Simulate 4 weeks</button>
+            <button id="resetPersonaBtn" class="secondary-action" type="button">Reset scenario</button>
+          </div>
+          <p>Use <strong>?demo=1</strong> or press <strong>Shift + D</strong> to show or hide these controls.</p>
+        </section>
 
-        <div class="safety-note">
-          <strong>Not a diagnosis.</strong>
-          Stop exercise for chest pain, faintness, severe breathlessness, new weakness, or sharp pain.
+        <div class="safety-note" aria-label="Safety and evidence">
+          <span>Wellness guidance only.</span>
           <button id="evidenceLinkBtn" class="text-link" type="button">Evidence basis</button>
         </div>
             </aside>
@@ -43,24 +53,28 @@
             <p id="heroMessage" class="hero-message"></p>
             <div class="hero-actions">
               <button id="startCheckBtn" class="primary-action" type="button">Start guided check</button>
-              <button id="demoProgressBtn" class="secondary-action" type="button">Run 4-week demo</button>
             </div>
           </div>
           <div class="hero-score-card">
-            <div class="score-line">
-              <span id="scoreValue">--</span>
-              <span>Function score</span>
+            <div>
+              <p class="hero-score-label">Function Resilience Score</p>
+              <div class="score-line">
+                <span id="scoreValue">--</span>
+                <span>out of 100</span>
+              </div>
             </div>
+            <strong id="scoreBand">Loading</strong>
             <div class="score-meter" aria-hidden="true">
               <div id="scoreFill"></div>
             </div>
-            <strong id="scoreBand">Loading</strong>
-            <div class="movement-scene" aria-hidden="true">
-              <span class="motion-line line-one"></span>
-              <span class="motion-line line-two"></span>
-              <span class="motion-person"></span>
-              <span class="motion-support"></span>
-            </div>
+            <img
+              class="hero-illustration"
+              src="./assets/illustrations/progress-success.png"
+              alt=""
+              width="512"
+              height="512"
+              loading="eager"
+            />
           </div>
         </section>
 
@@ -91,6 +105,7 @@
                   <div><dt>Chair stands</dt><dd id="statChair">--</dd></div>
                   <div><dt>Balance</dt><dd id="statBalance">--</dd></div>
                 </dl>
+                <div id="scoreBreakdown" class="score-breakdown" aria-label="Function score breakdown"></div>
               </div>
             </article>
 
@@ -117,12 +132,12 @@
             <div>
               <p class="eyebrow">Guided assessment</p>
               <h2 id="assessTitle">Update function checks</h2>
+              <p class="section-note">Do this weekly, or every few days if your mobility changes. Your daily workout uses the latest saved score.</p>
             </div>
-            <button id="saveAssessmentBtn" class="primary-action" type="button">Save assessment</button>
           </div>
 
           <div class="assessment-steps" aria-label="Assessment flow">
-            <article>
+            <article class="is-current">
               <span>01</span>
               <strong>Safety first</strong>
               <p>Confirm red flags and support needs before movement.</p>
@@ -138,6 +153,35 @@
               <p>Refresh the score and workout level from today's results.</p>
             </article>
           </div>
+
+          <section class="instruction-panel" aria-label="How to complete the assessment">
+            <div>
+              <p class="eyebrow">Before you start</p>
+              <h3>Use a stable chair, clear walking path, and support nearby.</h3>
+              <p>Stop and skip the workout if you feel chest pain, faintness, severe breathlessness, new weakness, or sharp pain.</p>
+            </div>
+            <details>
+              <summary>How to run each check</summary>
+              <div class="guide-grid">
+                <article>
+                  <strong>Timed Up and Go</strong>
+                  <p>Sit in a chair. Stand up, walk 3 meters, turn, walk back, and sit down. Use your usual walking aid if needed. Enter the seconds.</p>
+                </article>
+                <article>
+                  <strong>Chair stands</strong>
+                  <p>Count how many full stands you can do in 30 seconds. Use armrests only if that is your normal safe method.</p>
+                </article>
+                <article>
+                  <strong>Balance stage</strong>
+                  <p>Pick the hardest stance you can hold safely: feet together, semi-tandem, tandem, or single-leg. Keep support within reach.</p>
+                </article>
+                <article>
+                  <strong>Confidence</strong>
+                  <p>Choose high only when timing and counting were clear. Choose low if pain, interruptions, or uncertainty affected the result.</p>
+                </article>
+              </div>
+            </details>
+          </section>
 
           <div class="assessment-grid">
             <article class="panel">
@@ -156,10 +200,12 @@
                 <label class="field" for="tugInput">
                   <span>Timed Up and Go, seconds</span>
                   <input id="tugInput" type="number" min="4" max="60" step="0.1" />
+                  <small>Time the stand-walk-turn-sit check.</small>
                 </label>
                 <label class="field" for="chairInput">
                   <span>30-second chair stands</span>
                   <input id="chairInput" type="number" min="0" max="40" step="1" />
+                  <small>Count full stands completed in 30 seconds.</small>
                 </label>
                 <label class="field" for="balanceStageInput">
                   <span>Highest balance stage</span>
@@ -169,14 +215,17 @@
                     <option value="3">3 - tandem</option>
                     <option value="4">4 - single-leg</option>
                   </select>
+                  <small>Select the hardest stage held safely.</small>
                 </label>
                 <label class="field" for="balanceSecondsInput">
                   <span>Balance hold, seconds</span>
                   <input id="balanceSecondsInput" type="number" min="0" max="30" step="1" />
+                  <small>Enter the longest steady hold, up to 30 seconds.</small>
                 </label>
                 <label class="field" for="gaitInput">
                   <span>Optional 4m gait speed, m/s</span>
                   <input id="gaitInput" type="number" min="0.1" max="2.4" step="0.05" />
+                  <small>Leave blank if you did not measure walking speed.</small>
                 </label>
                 <label class="field" for="confidenceInput">
                   <span>Measurement confidence</span>
@@ -185,6 +234,7 @@
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
                   </select>
+                  <small>Lower confidence makes the app progress more carefully.</small>
                 </label>
               </div>
               <div class="manual-tools">
@@ -193,6 +243,9 @@
                 <button id="addRepBtn" class="secondary-action" type="button">Add chair rep</button>
                 <span id="timerReadout" aria-live="polite">Timer ready</span>
               </div>
+              <div class="assessment-save-row">
+                <button id="saveAssessmentBtn" class="primary-action" type="button">Save assessment and update plan</button>
+              </div>
             </article>
           </div>
         </section>
@@ -200,8 +253,8 @@
         <section id="view-plan" class="view" aria-labelledby="planTitle">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Adaptive workout</p>
-              <h2 id="planTitle">Workout prescription</h2>
+              <p class="eyebrow">Daily workout</p>
+              <h2 id="planTitle">Today's plan</h2>
             </div>
             <span id="planLevel" class="pill"></span>
           </div>
@@ -214,8 +267,8 @@
               <p class="eyebrow">Trend review</p>
               <h2 id="progressTitle">Four-week progress</h2>
             </div>
-            <button id="resetPersonaBtn" class="secondary-action" type="button">Reset persona</button>
           </div>
+          <article id="progressInsight" class="story-card progress-insight" aria-live="polite"></article>
           <div class="progress-layout">
             <article class="panel span-2">
               <h3>Score trend</h3>
@@ -237,14 +290,39 @@
             <button id="copySummaryBtn" class="secondary-action" type="button">Copy summary</button>
           </div>
           <div class="coach-grid">
-            <article class="panel span-2">
-              <h3>For the elder</h3>
-              <p id="elderSummary" class="coach-copy"></p>
+            <article class="panel coach-card span-2">
+              <img src="./assets/illustrations/coach-avatar.png" alt="" width="512" height="512" loading="lazy" />
+              <div>
+                <h3>Your coach</h3>
+                <p class="muted">Supportive wellness guidance for safe movement and steady progress.</p>
+                <div class="coach-tabs" role="tablist" aria-label="Summary audience">
+                  <button class="summary-toggle is-active" data-summary="elder" type="button">For me</button>
+                  <button class="summary-toggle" data-summary="caregiver" type="button">For caregiver</button>
+                </div>
+                <p id="elderSummary" class="coach-copy summary-panel is-visible"></p>
+                <p id="caregiverSummary" class="coach-copy summary-panel"></p>
+              </div>
             </article>
-            <article class="panel">
-              <h3>For caregiver or PT</h3>
-              <p id="caregiverSummary" class="coach-copy"></p>
-            </article>
+            <details id="appWalkthrough" class="panel evidence-panel span-2">
+              <summary>
+                <span>How to use this app</span>
+                <small>Daily workout, periodic checks, progress review</small>
+              </summary>
+              <div class="evidence-content">
+                <div class="source-group">
+                  <h3>Every day</h3>
+                  <p>Open Today, review any safety alerts, then complete the Workout plan. Mark the workout done when finished.</p>
+                </div>
+                <div class="source-group">
+                  <h3>Once a week or every few days</h3>
+                  <p>Use Assess to refresh the function score. The app uses the latest checks to adjust workout level, support, and progression.</p>
+                </div>
+                <div class="source-group">
+                  <h3>When reviewing progress</h3>
+                  <p>Use Progress to see what improved, what still needs attention, and what to focus on next.</p>
+                </div>
+              </div>
+            </details>
             <details id="evidenceSources" class="panel evidence-panel span-2">
               <summary>
                 <span>Evidence & Sources</span>
@@ -303,6 +381,6 @@
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./src/app.js?v=7"></script>
+    <script type="module" src="./src/app.js?v=12"></script>
   </body>
 </html>

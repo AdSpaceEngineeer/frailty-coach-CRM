@@ -6,12 +6,15 @@ import {
   getWorkoutPlan,
   makeHistoryWithCurrent
 } from "./logic.js";
-import { fallQuestions, personas, safetyQuestions } from "./data.js";
+import { fallQuestions, personas, safetyQuestions } from "./data.js?v=12";
 
-const STORAGE_KEY = "frailty-coach-state-v1";
+const NORMAL_STORAGE_KEY = "frailty-coach-state-v2";
+const PRESENTER_STORAGE_KEY = "frailty-coach-presenter-state-v1";
+const urlParams = new URLSearchParams(window.location.search);
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
+let presenterMode = urlParams.get("demo") === "1";
 let appState = loadState();
 let activeTimer = null;
 let timerStart = 0;
@@ -20,6 +23,7 @@ init();
 
 function init() {
   renderPersonaOptions();
+  setPresenterMode(presenterMode, { announce: false });
   renderQuestionLists();
   bindEvents();
   render();
@@ -43,6 +47,9 @@ function bindEvents() {
 
   $("#startCheckBtn").addEventListener("click", () => showView("assess"));
   $("#evidenceLinkBtn").addEventListener("click", () => showEvidenceSources());
+  $$(".summary-toggle").forEach((button) => {
+    button.addEventListener("click", () => showSummary(button.dataset.summary));
+  });
 
   $("#saveAssessmentBtn").addEventListener("click", () => {
     readAssessmentForm();
@@ -56,20 +63,28 @@ function bindEvents() {
     saveState();
     render();
     toast("Four-week progress simulated");
+    showView("progress");
   });
 
   $("#completeWorkoutBtn").addEventListener("click", () => {
     appState = completeWorkout(appState);
     saveState();
     render();
-    toast("Workout completed");
+    toast("Workout marked done");
   });
 
   $("#resetPersonaBtn").addEventListener("click", () => {
     appState = clonePersona(appState.id);
     saveState();
     render();
-    toast("Persona reset");
+    toast("Scenario reset");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!event.shiftKey || event.key.toLowerCase() !== "d") return;
+    if (event.target?.matches?.("input, select, textarea")) return;
+    event.preventDefault();
+    setPresenterMode(!presenterMode);
   });
 
   $("#startTimerBtn").addEventListener("click", () => {
@@ -111,6 +126,7 @@ function render() {
   const coach = buildCoachCopy(appState, score, plan);
 
   $("#personaSelect").value = appState.id;
+  $(".app-shell")?.setAttribute("data-presenter-mode", presenterMode ? "true" : "false");
   renderHero(score);
   renderScore(score);
   renderAssessmentForm();
@@ -120,6 +136,7 @@ function render() {
   renderWorkout(plan);
   renderProgress(history);
   renderProgressStory(history, score);
+  renderProgressInsight(history, score, plan);
   renderCoach(coach);
 }
 
@@ -129,7 +146,7 @@ function renderHero(score) {
   const supervised = score.status.shouldSupervise ? "with support nearby" : "at your own pace";
   $("#greetingEyebrow").textContent = `Good morning, ${firstName}`;
   $("#heroTitle").textContent = getHeroTitle(score.band);
-  $("#heroMessage").textContent = `Today's plan focuses on ${labelDomain(lowest)} ${supervised}. Your wearable trend and movement checks set the workout level.`;
+  $("#heroMessage").textContent = `Do today's workout ${supervised}. It focuses on ${labelDomain(lowest)}, using your latest movement checks and wearable trend.`;
 }
 
 function renderScore(score) {
@@ -137,12 +154,27 @@ function renderScore(score) {
   $("#scoreBand").textContent = score.bandLabel;
   $("#scoreFill").style.width = `${score.total}%`;
   $("#ringValue").textContent = score.total;
+  $("#scoreRing").setAttribute("aria-label", `Function score ${score.total}. ${score.bandLabel}.`);
   $("#scoreRing").style.setProperty("--score", `${score.total * 3.6}deg`);
   $("#scoreTitle").textContent = score.bandLabel;
   $("#scoreExplanation").textContent = score.explanation;
   $("#statTug").textContent = `${appState.assessment.tugSeconds}s`;
   $("#statChair").textContent = appState.assessment.chairStands;
   $("#statBalance").textContent = `Stage ${appState.assessment.balanceStage}`;
+  $("#scoreBreakdown").innerHTML = scoreBreakdownRows(score)
+    .map(
+      ({ label, value, help }) => `
+        <div class="score-breakdown-row">
+          <div>
+            <strong>${label}</strong>
+            <span>${help}</span>
+          </div>
+          <div class="breakdown-meter" aria-hidden="true"><span style="width:${value}%"></span></div>
+          <b>${value}</b>
+        </div>
+      `
+    )
+    .join("");
 }
 
 function renderWearable(score) {
@@ -160,10 +192,10 @@ function renderWearable(score) {
 
 function renderTodayFocus(score, plan) {
   const focus = [
-    ["Current band", score.bandLabel],
+    ["Today", "Do the workout plan and keep the effort comfortable."],
+    ["Next check", "Update Assess weekly, or sooner if mobility changes."],
     ["Safety posture", score.status.shouldSupervise ? "Use support or supervision" : "Independent with clear space"],
-    ["Workout rule", plan.progression],
-    ["Wearable source", appState.wearable.source]
+    ["Workout rule", plan.progression]
   ];
   $("#todayFocus").innerHTML = focus
     .map(([label, value]) => `<div><strong>${label}</strong><span>${value}</span></div>`)
@@ -190,25 +222,36 @@ function renderWorkout(plan) {
   $("#workoutPlan").innerHTML = `
     <article class="panel workout-intro">
       <div class="exercise-visual featured-visual ${visualClassFor(plan.exercises[0]?.name || "")}" aria-hidden="true">
-        <span></span><span></span><span></span>
+        <img src="${exerciseImageFor(plan.exercises[0]?.name || "")}" alt="" loading="lazy" width="512" height="512" />
       </div>
+      <span class="exercise-kicker">Daily plan</span>
       <h3>${plan.label}</h3>
       <p>${plan.support}</p>
       <p class="muted">${plan.progression}</p>
+      <dl class="action-list compact-action-list">
+        <div><dt>How hard</dt><dd>Comfortable effort. You should be able to speak in short sentences.</dd></div>
+        <div><dt>Stop if</dt><dd>Chest pain, faintness, severe breathlessness, new weakness, or sharp pain appears.</dd></div>
+      </dl>
     </article>
     ${plan.exercises
-      .map(
-        (exercise) => `
+      .map((exercise) => {
+        const guidance = exerciseGuidance(exercise.name, plan.support);
+        return `
           <article class="panel exercise-card">
             <div class="exercise-visual ${visualClassFor(exercise.name)}" aria-hidden="true">
-              <span></span><span></span><span></span>
+              <img src="${exerciseImageFor(exercise.name)}" alt="" loading="lazy" width="512" height="512" />
             </div>
             <span class="exercise-kicker">${exercise.dose}</span>
             <h3>${exercise.name}</h3>
             <p>${exercise.coaching}</p>
+            <dl class="action-list">
+              <div><dt>Set up</dt><dd>${guidance.setup}</dd></div>
+              <div><dt>Do</dt><dd>${guidance.action}</dd></div>
+              <div><dt>Watch</dt><dd>${guidance.watch}</dd></div>
+            </dl>
           </article>
-        `
-      )
+        `;
+      })
       .join("")}
   `;
 }
@@ -258,9 +301,41 @@ function renderProgress(history) {
     .join("");
 }
 
+function renderProgressInsight(history, score, plan) {
+  const first = history[0];
+  const last = history[history.length - 1];
+  const scoreDelta = last.score - first.score;
+  const tugGain = round1(first.tugSeconds - last.tugSeconds);
+  const chairGain = last.chairStands - first.chairStands;
+  const balanceGain = last.balanceStage - first.balanceStage;
+  const weakest = Object.entries(score.subScores).sort((a, b) => a[1] - b[1])[0];
+  const bestChange =
+    chairGain >= Math.max(tugGain, balanceGain)
+      ? `${signed(chairGain)} chair stands`
+      : tugGain >= balanceGain
+        ? `${tugGain}s faster TUG`
+        : `${signed(balanceGain)} balance stage`;
+
+  $("#progressInsight").innerHTML = `
+    <div>
+      <p class="eyebrow">What this means</p>
+      <h3>${scoreDelta > 0 ? `Trending up: ${signed(scoreDelta)} score points` : "Keep building consistency"}</h3>
+      <p>${scoreDelta > 0 ? `Biggest visible change: ${bestChange}.` : "The score has not moved yet, so consistency matters more than progression."} The next focus is ${labelDomain(weakest[0])}, which is currently ${weakest[1]}/100.</p>
+    </div>
+    <button class="secondary-action story-action" type="button" data-view-target="plan">${plan.deload ? "Do easy plan" : "Do today's plan"}</button>
+  `;
+  $("#progressInsight .story-action").addEventListener("click", () => showView("plan"));
+}
+
 function renderCoach(coach) {
   $("#elderSummary").textContent = coach.elder;
   $("#caregiverSummary").textContent = coach.caregiver;
+}
+
+function showSummary(target) {
+  $$(".summary-toggle").forEach((button) => button.classList.toggle("is-active", button.dataset.summary === target));
+  $$(".summary-panel").forEach((panel) => panel.classList.remove("is-visible"));
+  $(`#${target === "caregiver" ? "caregiverSummary" : "elderSummary"}`).classList.add("is-visible");
 }
 
 function renderPersonaOptions() {
@@ -320,7 +395,7 @@ function showView(view) {
   $$(".tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.view === view));
   $$(".view").forEach((panel) => panel.classList.toggle("is-visible", panel.id === `view-${view}`));
   $("#main").focus({ preventScroll: true });
-  $(".phone-screen")?.scrollTo({ top: 0, behavior: "smooth" });
+  resetScrollPosition();
 }
 
 function showEvidenceSources() {
@@ -332,20 +407,40 @@ function showEvidenceSources() {
 
 function loadState() {
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const stored = JSON.parse(localStorage.getItem(currentStorageKey()));
     if (stored?.id && personas[stored.id]) return stored;
   } catch {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(currentStorageKey());
   }
   return clonePersona("grace");
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  localStorage.setItem(currentStorageKey(), JSON.stringify(appState));
 }
 
 function clonePersona(id) {
   return structuredClone(personas[id] || personas.grace);
+}
+
+function currentStorageKey() {
+  return presenterMode ? PRESENTER_STORAGE_KEY : NORMAL_STORAGE_KEY;
+}
+
+function setPresenterMode(enabled, options = {}) {
+  const { announce = true } = options;
+  presenterMode = Boolean(enabled);
+  document.body.classList.toggle("presenter-mode", presenterMode);
+  $(".app-shell")?.setAttribute("data-presenter-mode", presenterMode ? "true" : "false");
+  $("#presenterControls").hidden = !presenterMode;
+  $("#personaSelect").value = appState.id;
+
+  if (announce) toast(`Presenter controls ${presenterMode ? "shown" : "hidden"}`);
+}
+
+function resetScrollPosition() {
+  $(".phone-screen")?.scrollTo({ top: 0, behavior: "auto" });
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function updateTimerReadout() {
@@ -390,6 +485,87 @@ function labelDomain(key) {
   }[key] || key;
 }
 
+function labelDomainTitle(key) {
+  return {
+    mobility: "Mobility",
+    strength: "Leg strength",
+    balance: "Balance",
+    activity: "Daily activity",
+    recovery: "Recovery"
+  }[key] || key;
+}
+
+function scoreBreakdownRows(score) {
+  const help = {
+    mobility: "TUG and walking speed",
+    strength: "Chair-stand ability",
+    balance: "Balance stage and hold time",
+    activity: "Steps, active minutes, sitting time",
+    recovery: "Sleep and heart-rate recovery"
+  };
+
+  return Object.entries(score.subScores).map(([key, value]) => ({
+    label: labelDomainTitle(key),
+    value,
+    help: help[key]
+  }));
+}
+
+function exerciseGuidance(name, support) {
+  const normalized = name.toLowerCase();
+  const supportCue = support.toLowerCase().includes("chair") || support.toLowerCase().includes("counter")
+    ? "Keep a stable chair or counter within reach."
+    : "Use clear floor space and keep support nearby if balance feels uncertain.";
+
+  if (normalized.includes("walk") || normalized.includes("march")) {
+    return {
+      setup: supportCue,
+      action: "Walk or march at a pace where you can still talk. Rest fully between rounds.",
+      watch: "Slow down or stop if your steps become uneven or you feel breathless."
+    };
+  }
+  if (normalized.includes("sit-to-stand") || normalized.includes("squat")) {
+    return {
+      setup: "Use a firm chair that will not slide. Place feet flat and hip-width apart.",
+      action: "Stand tall, then sit with control. Use hands if needed for safety.",
+      watch: "Stop before leg fatigue changes your form or makes you drop into the chair."
+    };
+  }
+  if (normalized.includes("balance") || normalized.includes("tandem") || normalized.includes("weight shift") || normalized.includes("tap")) {
+    return {
+      setup: "Stand beside a counter or chair. Keep fingertips close enough to catch yourself.",
+      action: "Move slowly and reset posture between holds or taps.",
+      watch: "Do not practice balance in open space without support nearby."
+    };
+  }
+  if (normalized.includes("heel") || normalized.includes("toe") || normalized.includes("calf")) {
+    return {
+      setup: "Face a counter or hold the back of a stable chair.",
+      action: "Rise and lower slowly. Keep pressure even through both feet.",
+      watch: "Stop if ankle, knee, or calf pain appears."
+    };
+  }
+  if (normalized.includes("push") || normalized.includes("row")) {
+    return {
+      setup: "Stand tall with feet planted and shoulders relaxed.",
+      action: "Move through a comfortable range and breathe normally.",
+      watch: "Keep the effort smooth. Stop if shoulder, chest, or back pain appears."
+    };
+  }
+  if (normalized.includes("carry")) {
+    return {
+      setup: "Choose light, even weights and clear the walking path.",
+      action: "Walk tall with shoulders level and short, steady steps.",
+      watch: "Put the weights down if grip, posture, or balance changes."
+    };
+  }
+  return {
+    setup: supportCue,
+    action: "Move slowly, breathe normally, and keep the effort comfortable.",
+    watch: "Stop if pain, dizziness, or unsteady balance appears."
+  };
+}
+
 function visualClassFor(name) {
   const normalized = name.toLowerCase();
   if (normalized.includes("walk") || normalized.includes("march") || normalized.includes("step")) return "visual-walk";
@@ -397,4 +573,17 @@ function visualClassFor(name) {
   if (normalized.includes("push") || normalized.includes("row")) return "visual-upper";
   if (normalized.includes("carry")) return "visual-carry";
   return "visual-stand";
+}
+
+function exerciseImageFor(name) {
+  const normalized = name.toLowerCase();
+  if (normalized.includes("push") || normalized.includes("row")) return "./assets/illustrations/wall-pushups.png";
+  if (normalized.includes("walk") || normalized.includes("march")) return "./assets/illustrations/hallway-walk.png";
+  if (normalized.includes("balance") || normalized.includes("tandem") || normalized.includes("weight") || normalized.includes("tap")) {
+    return "./assets/illustrations/weight-shifts.png";
+  }
+  if (normalized.includes("heel") || normalized.includes("toe") || normalized.includes("calf")) {
+    return "./assets/illustrations/weight-shifts.png";
+  }
+  return "./assets/illustrations/supported-sit-to-stand.png";
 }
