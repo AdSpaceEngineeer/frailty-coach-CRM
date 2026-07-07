@@ -160,12 +160,26 @@ export function applyFourWeekProgress(state) {
 }
 
 export function completeWorkout(state) {
+  const today = localDateKey();
   const next = structuredClone(state);
+  if (next.adherence.lastWorkoutDate === today) return next;
   next.adherence.completedThisWeek = Math.min(7, next.adherence.completedThisWeek + 1);
   next.adherence.missedSessions = Math.max(0, next.adherence.missedSessions - 1);
+  next.adherence.lastWorkoutDate = today;
   next.wearable.activeMinutes = Math.min(90, next.wearable.activeMinutes + 8);
   next.wearable.steps = Math.round(next.wearable.steps + 450);
   return next;
+}
+
+export function isWorkoutCompleteToday(state, now = new Date()) {
+  return state?.adherence?.lastWorkoutDate === localDateKey(now);
+}
+
+function localDateKey(now = new Date()) {
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 export function makeHistoryWithCurrent(state, scoreResult) {

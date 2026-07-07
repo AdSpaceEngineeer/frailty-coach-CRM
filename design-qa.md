@@ -1,49 +1,56 @@
-# Design QA: Guided Companion v12
+# Design QA: Frailty Coach v2 v35
 
-source visual truth path: `design/mockups/frailty-coach-2026-07-06/guided-companion.png`
+source visual truth:
 
-implementation screenshot path: `product-design-audit/guided-companion-v12-qa/implementation-today-mobile.png`
+- Core Screens: `design/mockups/frailty-coach-v2/core-screens.png`
+- Guided Assessment: `design/mockups/frailty-coach-v2/guided-assessment.png`
+- Workout Session: `design/mockups/frailty-coach-v2/workout-session.png`
+- Details + Presenter: `design/mockups/frailty-coach-v2/details-and-presenter.png`
 
-additional implementation screenshots:
+implementation URL: `http://localhost:5175/?v=35`
 
-- `product-design-audit/guided-companion-v12-qa/implementation-workout-mobile.png`
-- `product-design-audit/guided-companion-v12-qa/implementation-coach-mobile.png`
+implementation screenshots:
 
-viewport: `390 x 844`
+- Assessment strength: `product-design-audit/frailty-coach-v35-qa/01-assess-strength.png`
+- Assessment save: `product-design-audit/frailty-coach-v35-qa/02-assess-save.png`
+- Workout overview: `product-design-audit/frailty-coach-v35-qa/03-workout-overview.png`
+- Workout active: `product-design-audit/frailty-coach-v35-qa/04-workout-active.png`
+- Coach: `product-design-audit/frailty-coach-v35-qa/05-coach.png`
+- Broader pass screenshots: `product-design-audit/frailty-coach-v34-qa/`
 
-state: normal app mode, Grace persona, Today / Workout / Coach screens
+viewport: 390 x 844 mobile
 
-full-view comparison evidence: `product-design-audit/guided-companion-v12-qa/source-vs-implementation.png`
+state coverage:
 
-focused region comparison evidence: not required for this pass. The source visual is a five-screen concept board rather than a pixel-specific single-screen spec; the key fidelity surfaces were visible in the full comparison at the target mobile viewport.
+- Guided assessment Strength and Save steps
+- Workout overview and active exercise
+- Coach tab after hierarchy and header changes
+- Progress and Today were checked in the v34 screenshot pass
 
 ## Findings
 
-- No actionable P0/P1/P2 findings remain.
+- No actionable P0/P1/P2 findings remain for this pass.
 
 ## Fidelity Surface Review
 
-- Fonts and typography: passed. The implementation keeps large, readable product typography with strong hierarchy for older adults. It does not exactly match the generated mockup's display font, but the weight, size, line height, and wrapping are usable and visually aligned with the direction.
-- Spacing and layout rhythm: passed. The app now uses warmer grouped surfaces, larger controls, clear row spacing, and reserved bottom-nav space. The Today hero remains taller than the mockup, but it still leaves the next section visible and does not block interaction.
-- Colors and visual tokens: passed. The implementation uses the Guided Companion ivory, deep green, warm yellow, coral, soft blue, and sage direction consistently.
-- Image quality and asset fidelity: passed. The coach avatar and exercise thumbnails are real generated raster assets stored in `assets/illustrations/`. The previous CSS-drawn exercise/person visuals were replaced in the primary app surfaces.
-- Copy and content: passed. The implementation preserves the app's wellness framing, safety language, ability band, workout support cues, and evidence access while adopting warmer coach-oriented phrasing.
+- Screen headers: passed for this iteration. Workout, Progress, and Coach now use screen-specific top bars instead of the generic brand header.
+- Assessment Strength: passed. Native-select feel was replaced with touch-friendly balance tiles and a hold-time stepper.
+- Assessment Save: passed. The score card hierarchy is compact, the save action is visible, and the plan name no longer overwhelms the screen.
+- Workout overview: passed. The overview now uses a plan intro, right-sized coach artwork, clear exercise rows, and visible primary/secondary actions.
+- Workout active: passed. The exercise image no longer pushes the rep counter and primary action below the first viewport.
+- Coach: passed. The screen now leads with avatar preference, audience toggle, concise coaching message, and help/evidence disclosures.
 
-## Patches Made Since QA Review Started
+## Remaining P3 Polish
 
-- Added project illustration assets for coach avatar, progress/success, supported sit-to-stand, weight shifts, wall push-ups, and hallway walk.
-- Reworked the Today hero toward the Guided Companion direction.
-- Replaced generated workout card CSS art with raster exercise thumbnails.
-- Added coach summary audience toggles.
-- Preserved normal mode vs presenter mode behavior.
-- Updated cache references to `v12`.
-- Added the new assets to the service worker cache list.
-- Updated README with the current visual direction and asset inventory.
+- Icons are more consistent and better sized, but not a true installed icon-library match to the mockups.
+- The app is closer to the boards but still not pixel-perfect on exact typography, pictogram style, and some illustration crops.
+- Workout duration still reflects current seeded plan length (`20 min`) rather than the mockup's simplified `15 min` copy.
 
-## Follow-up Polish
+## Verification
 
-- Consider making the Today hero slightly more compact in a future iteration if user testing shows older adults want to see the first daily action without scrolling.
-- Generate a second exercise asset pass for advanced/robust movements, such as step-ups, loaded carries, and fast walking, if those levels become a major demo focus.
-- Replace the CSS-only bottom navigation glyphs with a formal icon library if dependencies are introduced later.
+- `node --check src/app.js`: passed
+- `npm test`: passed
+- `git diff --check`: passed
+- Served HTML check: `styles.css?v=35` and `src/app.js?v=35`
 
 final result: passed

@@ -51,6 +51,10 @@ function testWorkoutCompletionUpdatesActivity() {
   assert.equal(afterState.adherence.completedThisWeek, state.adherence.completedThisWeek + 1);
   assert.ok(afterState.wearable.steps > state.wearable.steps);
   assert.ok(afterState.wearable.activeMinutes > state.wearable.activeMinutes);
+
+  const repeatedState = completeWorkout(afterState);
+  assert.equal(repeatedState.adherence.completedThisWeek, afterState.adherence.completedThisWeek);
+  assert.equal(repeatedState.wearable.steps, afterState.wearable.steps);
 }
 
 testPersonaOrdering();

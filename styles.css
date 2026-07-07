@@ -20,6 +20,2077 @@
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* v28 mockup fidelity layer: view-scoped so later generic rules do not dilute it. */
+.phone-screen .header-greeting {
+  color: #f5fffb;
+  display: none;
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin: 0.7rem 0 0;
+}
+
+.phone-screen .app-shell[data-view="today"] .header-greeting {
+  display: block;
+}
+
+.phone-screen .app-shell[data-view="today"] .header-greeting::after {
+  color: #f3c64f;
+  content: "  ☀";
+}
+
+.phone-screen .app-shell[data-view="today"] .sidebar {
+  gap: 0.35rem !important;
+  min-height: 8.45rem;
+}
+
+.phone-screen .app-shell[data-view="today"] .main {
+  gap: 0.62rem !important;
+  padding-top: 0.72rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-copy {
+  min-height: 9.75rem !important;
+  padding: 0.88rem 0.88rem 0.88rem 5.55rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-copy .eyebrow {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-copy h2 {
+  font-size: 1.16rem !important;
+  line-height: 1.08 !important;
+  max-width: 12.5rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-message {
+  font-size: 0.82rem !important;
+  line-height: 1.28 !important;
+  max-width: 12.7rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-illustration {
+  height: 4.15rem !important;
+  top: 1.15rem !important;
+  width: 4.15rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-actions {
+  margin-top: 0.58rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-actions .primary-action {
+  min-height: 2.95rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .today-plan-card {
+  gap: 0.5rem !important;
+  padding: 0.68rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .today-plan-main {
+  gap: 0.62rem !important;
+  grid-template-columns: 3.15rem minmax(0, 1fr) !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .today-plan-main > div {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.phone-screen .app-shell[data-view="today"] .today-plan-main img {
+  grid-column: 1;
+  grid-row: 1;
+  height: 3rem !important;
+  width: 3rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .today-plan-main h3 {
+  font-size: 1rem !important;
+  line-height: 1.12 !important;
+}
+
+.phone-screen .app-shell[data-view="today"] #todayPlanMeta {
+  font-size: 0.82rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .status-row {
+  gap: 0.12rem !important;
+  padding: 0.55rem 0.65rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .status-row span {
+  font-size: 0.78rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .score-summary-card {
+  gap: 0.48rem !important;
+  padding: 0.68rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .score-summary-card .summary-row {
+  gap: 0.7rem !important;
+  grid-template-columns: 4.15rem minmax(0, 1fr) !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .summary-row h3 span {
+  font-size: 2.15rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] #scoreExplanation {
+  font-size: 0.82rem !important;
+  line-height: 1.28 !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .score-summary-card .small-ring {
+  height: 3.8rem !important;
+  width: 3.8rem !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .section-heading {
+  background: var(--teal);
+  color: #fff;
+  margin: -0.72rem -0.85rem 0;
+  padding: 0.85rem 0.85rem 0.78rem;
+  text-align: center;
+}
+
+.phone-screen .app-shell[data-view="plan"] .section-heading .eyebrow,
+.phone-screen .app-shell[data-view="plan"] .section-heading .section-note {
+  color: #d7eee8;
+}
+
+.phone-screen .app-shell[data-view="plan"] .section-heading h2 {
+  color: #fff;
+  font-size: 1.28rem;
+}
+
+.phone-screen .app-shell[data-presenter-mode="true"] .sidebar {
+  overflow: visible !important;
+  position: static !important;
+}
+
+.phone-screen .app-shell[data-presenter-mode="true"] .presenter-controls {
+  background: rgba(13, 45, 41, 0.98) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 8px !important;
+  bottom: auto !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34) !important;
+  display: grid !important;
+  left: 0.85rem !important;
+  max-height: calc(100% - 10rem) !important;
+  overflow: auto !important;
+  padding: 0.95rem !important;
+  position: absolute !important;
+  right: 0.85rem !important;
+  top: 5.25rem !important;
+  z-index: 80 !important;
+}
+
+.phone-screen .app-shell[data-presenter-mode="false"] .presenter-controls,
+.phone-screen .presenter-controls[hidden] {
+  display: none !important;
+}
+
+/* v30 guided assessment: match the saved mockup boards more closely. */
+.phone-screen .bottom-tabs {
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 -10px 28px rgba(22, 39, 35, 0.1) !important;
+  gap: 0.18rem !important;
+  padding: 0.42rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom)) !important;
+}
+
+.phone-screen .bottom-tabs .tab {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  color: #2d3e3c !important;
+  font-size: 0.66rem !important;
+  font-weight: 750 !important;
+  gap: 0.16rem !important;
+  min-height: 3.35rem !important;
+  padding: 0.32rem 0.14rem !important;
+}
+
+.phone-screen .bottom-tabs .tab.is-active,
+.phone-screen .bottom-tabs .tab:hover {
+  background: #edf6ef !important;
+  color: var(--teal) !important;
+}
+
+.phone-screen .nav-icon {
+  display: none !important;
+}
+
+.phone-screen .nav-svg {
+  display: block;
+  fill: none;
+  height: 1.28rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.85;
+  width: 1.28rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .sidebar {
+  align-items: center !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 40%),
+    linear-gradient(180deg, #006252, #004c41) !important;
+  border-radius: 16px 16px 0 0 !important;
+  color: white !important;
+  justify-content: center !important;
+  min-height: 4.92rem !important;
+  overflow: hidden !important;
+  padding: 0.92rem 1rem 0.78rem !important;
+  position: relative !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .sidebar::before {
+  color: white;
+  content: "‹";
+  font-size: 2.35rem;
+  font-weight: 300;
+  left: 0.82rem;
+  line-height: 1;
+  position: absolute;
+  top: 1.04rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .sidebar::after {
+  color: white;
+  content: "Assessment\A About 5 minutes · Do weekly";
+  font-size: 1.08rem;
+  font-weight: 900;
+  line-height: 1.16;
+  position: absolute;
+  text-align: center;
+  top: 1.05rem;
+  white-space: pre;
+}
+
+.phone-screen .app-shell[data-view="assess"] .brand-block,
+.phone-screen .app-shell[data-view="assess"] .header-greeting,
+.phone-screen .app-shell[data-view="assess"] .presenter-controls {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .safety-note {
+  background: transparent !important;
+  border: 0 !important;
+  color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  right: 0.92rem !important;
+  top: 1.14rem !important;
+  z-index: 2 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .safety-note::before {
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 999px;
+  color: white;
+  content: "?";
+  display: inline-flex;
+  font-size: 0.95rem;
+  font-weight: 900;
+  height: 1.48rem;
+  justify-content: center;
+  width: 1.48rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .safety-note .text-link {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .main {
+  gap: 0 !important;
+  padding: 0 0 calc(var(--bottom-nav-space) + 0.82rem) !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .section-heading {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #assessmentSteps.stepper {
+  background: #fffdf8 !important;
+  border-bottom: 1px solid rgba(20, 50, 48, 0.11) !important;
+  display: grid !important;
+  gap: 0.16rem !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  margin: 0 !important;
+  padding: 0.76rem 0.62rem 0.54rem !important;
+  position: relative !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #assessmentSteps.stepper::before {
+  background: #d9ddd7;
+  content: "";
+  height: 1px;
+  left: 2.4rem;
+  position: absolute;
+  right: 2.4rem;
+  top: 1.92rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-dot {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: #3b4f4c !important;
+  gap: 0.32rem !important;
+  min-height: 4.1rem !important;
+  padding: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon {
+  align-items: center;
+  background: #fffef9 !important;
+  border: 1px solid #d1d8d2 !important;
+  border-radius: 999px !important;
+  color: #6f7775 !important;
+  display: inline-flex;
+  font-size: 1rem !important;
+  font-weight: 900;
+  height: 2.35rem !important;
+  justify-content: center;
+  position: relative;
+  width: 2.35rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-shield::before {
+  content: "♢";
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-list::before {
+  content: "☷";
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-walk::before {
+  content: "⌁";
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-chair::before {
+  content: "▣";
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-check::before {
+  content: "✓";
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon::before {
+  content: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon svg {
+  display: block;
+  height: 1.28rem;
+  overflow: visible;
+  width: 1.28rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-icon-walk svg {
+  height: 1.38rem;
+  width: 1.38rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-dot strong {
+  border-bottom: 0 !important;
+  color: inherit !important;
+  font-size: 0.68rem !important;
+  font-weight: 750 !important;
+  line-height: 1.05 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-dot.is-active {
+  background: transparent !important;
+  color: var(--teal) !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-dot.is-active .step-icon {
+  background: var(--teal) !important;
+  border-color: var(--teal) !important;
+  color: white !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-dot.is-active strong {
+  border-bottom: 3px solid var(--teal) !important;
+  padding-bottom: 0.32rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-flow {
+  padding: 0.82rem 0.82rem 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel.is-visible {
+  gap: 0.82rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel > .eyebrow {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel h3 {
+  color: var(--ink) !important;
+  font-size: 1.46rem !important;
+  line-height: 1.08 !important;
+  margin: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel .muted,
+.phone-screen .app-shell[data-view="assess"] .assessment-instruction {
+  color: #36504b !important;
+  font-size: 0.94rem !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  margin: -0.32rem 0 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .check-list {
+  background: #fffef9 !important;
+  border: 1px solid #e2ddd1 !important;
+  border-radius: 8px !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row {
+  align-items: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e8e1d4 !important;
+  border-radius: 0 !important;
+  display: grid !important;
+  gap: 0.68rem !important;
+  grid-template-columns: 2.45rem minmax(0, 1fr) auto !important;
+  min-height: 4.1rem !important;
+  padding: 0.62rem 0.72rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row:last-child {
+  border-bottom: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row input {
+  height: 1px !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon {
+  align-items: center;
+  border-radius: 999px;
+  color: white;
+  display: inline-flex;
+  font-size: 1.05rem;
+  font-weight: 900;
+  height: 2.22rem;
+  justify-content: center;
+  width: 2.22rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-chestPain {
+  background: #df6e63;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-chestPain::before {
+  content: "♡";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-newWeakness {
+  background: #f0b247;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-newWeakness::before {
+  content: "!";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-sharpPain {
+  background: #efa43e;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-sharpPain::before {
+  content: "⌁";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-unsafeSetup {
+  background: #efa43e;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-unsafeSetup::before {
+  content: "!";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-needsAid {
+  background: #5a9a57;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-needsAid::before {
+  content: "∩";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-fellYear,
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-feelsUnsteady,
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-worriesFall,
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-medsDizzy {
+  background: #edf6ef;
+  color: #3f8a47;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-fellYear::before {
+  content: "↘";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-feelsUnsteady::before {
+  content: "│";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-worriesFall::before {
+  content: "?";
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-row-icon-medsDizzy::before {
+  content: "○";
+}
+
+.phone-screen .app-shell[data-view="assess"] .check-copy {
+  color: #1f3532;
+  font-size: 0.88rem;
+  font-weight: 650;
+  line-height: 1.22;
+}
+
+.phone-screen .app-shell[data-view="assess"] .switch-ui {
+  background: #d6dad7;
+  border: 1px solid #c5cbc7;
+  border-radius: 999px;
+  display: inline-flex;
+  height: 1.52rem;
+  position: relative;
+  width: 2.78rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .switch-ui::after {
+  background: white;
+  border-radius: 999px;
+  box-shadow: 0 2px 5px rgba(25, 35, 32, 0.18);
+  content: "";
+  height: 1.24rem;
+  left: 0.12rem;
+  position: absolute;
+  top: 0.1rem;
+  transition: transform 140ms ease;
+  width: 1.24rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row input:checked ~ .switch-ui {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row input:checked ~ .switch-ui::after {
+  transform: translateX(1.24rem);
+}
+
+.phone-screen .app-shell[data-view="assess"] .yes-no-toggle {
+  display: grid;
+  gap: 0.38rem;
+  grid-template-columns: repeat(2, 3.15rem);
+}
+
+.phone-screen .app-shell[data-view="assess"] .yes-no-toggle span {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #83b0a6;
+  border-radius: 7px;
+  color: #173a36;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 850;
+  justify-content: center;
+  min-height: 2.28rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row input:not(:checked) ~ .yes-no-toggle span:first-child,
+.phone-screen .app-shell[data-view="assess"] .assessment-check-row input:checked ~ .yes-no-toggle span:last-child {
+  background: #eaf5ef;
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.phone-screen .app-shell[data-view="assess"] .slim-alert,
+.phone-screen .app-shell[data-view="assess"] .support-note {
+  align-items: center !important;
+  background: #fff8e8 !important;
+  border: 1px solid #edca83 !important;
+  border-radius: 8px !important;
+  color: #263f3a !important;
+  display: flex !important;
+  font-size: 0.9rem !important;
+  gap: 0.65rem !important;
+  line-height: 1.3 !important;
+  min-height: 3.45rem !important;
+  padding: 0.7rem 0.85rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .slim-alert::before,
+.phone-screen .app-shell[data-view="assess"] .support-note::before {
+  color: #a96b0e;
+  content: "⚠";
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.phone-screen .app-shell[data-view="assess"] .timer-display {
+  background: #fffdf8 !important;
+  border: 1px solid #dfd8ca !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  color: var(--teal) !important;
+  font-size: 4.4rem !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+  padding: 1.08rem 0.7rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .timer-primary {
+  border-radius: 8px !important;
+  font-size: 1.28rem !important;
+  min-height: 4.1rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #startTimerBtn::before {
+  content: "▶";
+  font-size: 1.05rem;
+  margin-right: 0.48rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] #stopTimerBtn {
+  min-height: 3.25rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .setup-checks {
+  background: #f3f8f0 !important;
+  border: 1px solid #dce9d8 !important;
+  border-radius: 8px !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .setup-checks span {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #dce9d8 !important;
+  border-radius: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .setup-checks span:last-child {
+  border-bottom: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .measure-card,
+.phone-screen .app-shell[data-view="assess"] .field {
+  background: #fffdf8 !important;
+  border: 1px solid #dfd8ca !important;
+  border-radius: 8px !important;
+  padding: 0.82rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .measure-card .field {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #chairInput {
+  border: 0 !important;
+  color: var(--teal) !important;
+  font-size: 3.3rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #addRepBtn {
+  min-height: 3.1rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary {
+  background: #f2f7ee !important;
+  border: 1px solid #d5e2cd !important;
+  border-radius: 8px !important;
+  gap: 0 !important;
+  padding: 1rem !important;
+  text-align: left !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary div {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary .assessment-score-summary {
+  align-items: center !important;
+  display: grid !important;
+  gap: 0.95rem !important;
+  grid-template-columns: 3.6rem minmax(0, 1fr) !important;
+  min-height: 7.35rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .summary-star {
+  align-items: center;
+  background: #d9ecd1;
+  border-radius: 999px;
+  color: var(--teal);
+  display: inline-flex;
+  font-size: 1.45rem;
+  height: 3.6rem;
+  justify-content: center;
+  width: 3.6rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary span:not(.summary-star) {
+  color: #5f6d69 !important;
+  display: block;
+  font-size: 0.98rem !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.12rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary strong {
+  color: var(--teal) !important;
+  display: block;
+  font-size: 3.7rem !important;
+  line-height: 1 !important;
+  margin-bottom: 0.35rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-summary em {
+  color: var(--teal) !important;
+  display: block;
+  font-size: 1rem !important;
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1.22;
+}
+
+.phone-screen .app-shell[data-view="assess"] .confidence-toggle {
+  border: 1px solid #d8dcd8;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+}
+
+.phone-screen .app-shell[data-view="assess"] .confidence-toggle button {
+  background: #fffdf8;
+  border: 0;
+  border-right: 1px solid #d8dcd8;
+  color: #233a36;
+  font-weight: 850;
+  min-height: 2.75rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .confidence-toggle button:last-child {
+  border-right: 0;
+}
+
+.phone-screen .app-shell[data-view="assess"] .confidence-toggle button.is-active {
+  background: var(--teal);
+  color: white;
+}
+
+.phone-screen .app-shell[data-view="assess"] #saveAssessmentBtn::before {
+  content: "✓";
+  margin-right: 0.45rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] #saveAssessmentBtn {
+  min-height: 3.8rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .review-answers {
+  color: var(--teal) !important;
+  justify-self: center;
+  min-height: 2.1rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .next-assessment-note {
+  align-items: center;
+  background: #eef8ff !important;
+  border: 1px solid #bfe0f5 !important;
+  border-radius: 8px;
+  color: #19496b !important;
+  display: flex;
+  font-size: 0.86rem !important;
+  font-weight: 750 !important;
+  gap: 0.65rem;
+  line-height: 1.28 !important;
+  margin: 0 !important;
+  min-height: 3.35rem;
+  padding: 0.72rem 0.85rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .next-assessment-note::before {
+  content: "▣";
+  font-size: 1.15rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-actions {
+  background: var(--bg) !important;
+  bottom: var(--bottom-nav-space) !important;
+  display: grid !important;
+  gap: 0.75rem !important;
+  grid-template-columns: 0.9fr 1.1fr !important;
+  padding: 0.72rem 0.82rem 0.45rem !important;
+  position: sticky !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .step-actions .primary-action,
+.phone-screen .app-shell[data-view="assess"] .step-actions .secondary-action {
+  min-height: 3.2rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"][data-assessment-panel="save"] .step-actions {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="assess"][data-assessment-panel="save"] .assessment-flow {
+  padding-bottom: 1rem !important;
+}
+
+/* v19 mockup fidelity pass: app screen, not hardware chrome */
+@media (min-width: 760px) {
+  body {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(243, 198, 79, 0.18), transparent 18rem),
+      radial-gradient(circle at 85% 86%, rgba(17, 128, 111, 0.12), transparent 24rem),
+      #f8f4ec;
+    padding: 1.75rem;
+  }
+
+  .phone-frame {
+    aspect-ratio: 390 / 844;
+    background: transparent;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: none;
+    max-height: calc(100vh - 3.5rem);
+    padding: 0;
+    width: min(390px, calc(100vw - 2rem));
+  }
+
+  .phone-frame::before,
+  .phone-frame::after {
+    display: none;
+  }
+
+  .phone-screen {
+    background: var(--bg);
+    border: 1px solid rgba(20, 50, 48, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 18px 44px rgba(53, 45, 28, 0.14);
+    overflow: auto;
+  }
+
+  .phone-screen .sidebar {
+    border-radius: 16px 16px 0 0;
+    padding: 1rem;
+  }
+}
+
+.phone-screen .presenter-controls {
+  background: rgba(16, 38, 37, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  bottom: calc(var(--bottom-nav-space) + 0.9rem);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  left: 0.85rem;
+  max-height: min(22rem, 58vh);
+  overflow: auto;
+  position: absolute;
+  right: 0.85rem;
+  z-index: 30;
+}
+
+.phone-screen .coach-hero {
+  align-items: center;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+  grid-template-columns: 1fr;
+  padding: 0;
+}
+
+.phone-screen .coach-hero::after,
+.phone-screen .hero-score-card {
+  display: none;
+}
+
+.phone-screen .hero-copy {
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(53, 45, 28, 0.08);
+  min-height: 8.9rem;
+  padding: 1rem 1rem 1rem 5.8rem;
+  position: relative;
+}
+
+.phone-screen .hero-copy .eyebrow,
+.phone-screen .coach-hero .eyebrow {
+  color: var(--muted);
+}
+
+.phone-screen .hero-copy h2 {
+  color: var(--teal);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  max-width: 11rem;
+}
+
+.phone-screen .hero-message {
+  color: #334541;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  max-width: 13rem;
+}
+
+.phone-screen .hero-illustration {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 999px;
+  display: block;
+  height: 4.25rem;
+  left: 1rem;
+  object-fit: cover;
+  position: absolute;
+  top: 2.25rem;
+  width: 4.25rem;
+  z-index: 3;
+}
+
+.phone-screen .hero-actions {
+  margin-top: 0.8rem;
+}
+
+.phone-screen .hero-actions .primary-action {
+  align-items: center;
+  display: flex;
+  font-size: 1.02rem;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.45rem;
+}
+
+.phone-screen #view-today .section-heading {
+  display: none;
+}
+
+.phone-screen .today-plan-card {
+  background: #f6faef;
+}
+
+.phone-screen .today-plan-main img {
+  height: 4.9rem;
+}
+
+.phone-screen .score-summary-card .summary-row {
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+}
+
+.phone-screen .score-summary-card .summary-row > div:first-child {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.phone-screen .score-summary-card .small-ring {
+  grid-column: 1;
+  grid-row: 1;
+  height: 4.25rem;
+  width: 4.25rem;
+}
+
+/* v21 first-screen fidelity refinements. Keep this block after all other overrides. */
+.phone-screen .sidebar {
+  position: relative;
+}
+
+.phone-screen .safety-note {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+}
+
+.phone-screen .safety-note span {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.phone-screen .safety-note .text-link {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  color: #eef9f5;
+  display: inline-flex;
+  font-size: 0;
+  height: 1.85rem;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  width: 1.85rem;
+}
+
+.phone-screen .safety-note .text-link::before {
+  content: "?";
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.phone-screen #alerts:not(:has(.danger)) {
+  display: none;
+}
+
+.phone-screen #alerts .alert:not(.danger) {
+  display: none;
+}
+
+.phone-screen .hero-copy {
+  min-height: 11.6rem;
+  padding: 0.9rem 0.9rem 0.9rem 5.65rem;
+}
+
+.phone-screen .hero-copy h2 {
+  font-size: 1.28rem !important;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-message {
+  font-size: 0.9rem;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-illustration {
+  height: 4rem !important;
+  top: 2.05rem;
+  width: 4rem;
+}
+
+.phone-screen .hero-actions .primary-action {
+  min-height: 3.15rem;
+}
+
+.phone-screen .today-plan-card {
+  gap: 0.72rem;
+  padding: 0.9rem;
+}
+
+.phone-screen .today-plan-main {
+  grid-template-columns: minmax(0, 1fr) 5rem;
+}
+
+.phone-screen .today-plan-main h3 {
+  font-size: 1.22rem;
+}
+
+.phone-screen .today-plan-main img {
+  height: 4.2rem;
+}
+
+.phone-screen .today-plan-card .full-action {
+  display: none;
+}
+
+.phone-screen .status-row {
+  padding: 0.72rem;
+}
+
+.daily-workout-status {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.72rem;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  padding: 0.78rem 0.84rem;
+}
+
+.daily-workout-status strong,
+.daily-workout-status span {
+  display: block;
+}
+
+.daily-workout-status strong {
+  color: var(--ink);
+  font-size: 0.98rem;
+  line-height: 1.15;
+}
+
+.daily-workout-status span {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.32;
+  margin-top: 0.15rem;
+}
+
+.daily-workout-status .status-badge-icon {
+  align-items: center;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0;
+  width: 2.25rem;
+}
+
+.daily-workout-status .status-badge-icon::before {
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.daily-workout-status.is-due {
+  background: #fffaf0;
+  border-color: #ead9af;
+}
+
+.daily-workout-status.is-due .status-badge-icon {
+  background: #f7eac2;
+  color: #9b5b00;
+}
+
+.daily-workout-status.is-due .status-badge-icon::before {
+  content: "!";
+}
+
+.daily-workout-status.is-complete {
+  background: #eef8f1;
+  border-color: #cbe8d2;
+}
+
+.daily-workout-status.is-complete .status-badge-icon {
+  background: #d8f0db;
+  color: var(--teal);
+}
+
+.daily-workout-status.is-complete .status-badge-icon::before {
+  content: "✓";
+}
+
+.daily-workout-status.is-paused {
+  background: #eef8ff;
+  border-color: #c7dff1;
+}
+
+.daily-workout-status.is-paused .status-badge-icon {
+  background: #d6ebfa;
+  color: #23608d;
+}
+
+.daily-workout-status.is-paused .status-badge-icon::before {
+  content: "Ⅱ";
+}
+
+.phone-screen .daily-workout-status {
+  gap: 0.62rem;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  padding: 0.68rem 0.72rem;
+}
+
+.phone-screen .daily-workout-status .status-badge-icon {
+  width: 2rem;
+}
+
+/* v33 two-pass mockup alignment: final view-scoped polish layer. */
+.phone-screen {
+  --app-header-height: 5rem;
+}
+
+.phone-screen .app-shell {
+  color: #173430;
+}
+
+.phone-screen .panel,
+.phone-screen .story-card,
+.phone-screen .disclosure-card,
+.phone-screen .evidence-panel,
+.phone-screen .disclosure-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 8px 22px rgba(53, 45, 28, 0.06) !important;
+}
+
+.phone-screen h2,
+.phone-screen h3 {
+  letter-spacing: 0 !important;
+}
+
+.phone-screen .primary-action,
+.phone-screen .secondary-action {
+  border-radius: 8px !important;
+}
+
+.phone-screen .nav-svg {
+  height: 1.18rem !important;
+  stroke-width: 1.9 !important;
+  width: 1.18rem !important;
+}
+
+.phone-screen .bottom-tabs .tab {
+  border-radius: 8px !important;
+  min-height: 3.18rem !important;
+}
+
+.phone-screen .bottom-tabs .tab.is-active {
+  background: #eaf4ee !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .sidebar,
+.phone-screen .app-shell[data-view="progress"] .sidebar,
+.phone-screen .app-shell[data-view="coach"] .sidebar {
+  align-items: center !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    linear-gradient(180deg, #006252, #004a40) !important;
+  border-radius: 16px 16px 0 0 !important;
+  color: #fff !important;
+  justify-content: center !important;
+  min-height: var(--app-header-height) !important;
+  overflow: hidden !important;
+  padding: 0.92rem 3.1rem 0.78rem !important;
+  position: relative !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .sidebar::after,
+.phone-screen .app-shell[data-view="progress"] .sidebar::after,
+.phone-screen .app-shell[data-view="coach"] .sidebar::after {
+  color: #fff;
+  content: attr(data-screen-title) "\A" attr(data-screen-subtitle);
+  font-size: 1rem;
+  font-weight: 900;
+  left: 3rem;
+  line-height: 1.18;
+  position: absolute;
+  right: 3rem;
+  text-align: center;
+  top: 1.08rem;
+  white-space: pre;
+}
+
+.phone-screen .app-shell[data-view="plan"] .sidebar::before,
+.phone-screen .app-shell[data-view="coach"] .sidebar::before {
+  color: #fff;
+  content: "‹";
+  font-size: 2.2rem;
+  font-weight: 300;
+  left: 0.92rem;
+  line-height: 1;
+  position: absolute;
+  top: 1.15rem;
+}
+
+.phone-screen .app-shell[data-view="plan"] .brand-block,
+.phone-screen .app-shell[data-view="progress"] .brand-block,
+.phone-screen .app-shell[data-view="coach"] .brand-block,
+.phone-screen .app-shell[data-view="plan"] .header-greeting,
+.phone-screen .app-shell[data-view="progress"] .header-greeting,
+.phone-screen .app-shell[data-view="coach"] .header-greeting {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .safety-note,
+.phone-screen .app-shell[data-view="progress"] .safety-note,
+.phone-screen .app-shell[data-view="coach"] .safety-note {
+  background: transparent !important;
+  border: 0 !important;
+  color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  right: 0.92rem !important;
+  top: 1.08rem !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .safety-note .text-link,
+.phone-screen .app-shell[data-view="progress"] .safety-note .text-link,
+.phone-screen .app-shell[data-view="coach"] .safety-note .text-link {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .safety-note::before,
+.phone-screen .app-shell[data-view="progress"] .safety-note::before,
+.phone-screen .app-shell[data-view="coach"] .safety-note::before {
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  border-radius: 999px;
+  color: #fff;
+  content: "?";
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 900;
+  height: 1.46rem;
+  justify-content: center;
+  width: 1.46rem;
+}
+
+.phone-screen .app-shell[data-view="plan"] .section-heading,
+.phone-screen .app-shell[data-view="progress"] .section-heading,
+.phone-screen .app-shell[data-view="coach"] .section-heading {
+  display: none !important;
+}
+
+.phone-screen .app-shell[data-view="plan"] .main,
+.phone-screen .app-shell[data-view="progress"] .main,
+.phone-screen .app-shell[data-view="coach"] .main {
+  padding-top: 0.82rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-copy {
+  min-height: 9.35rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-actions .primary-action::before,
+.phone-screen #startWorkoutSessionBtn::before {
+  content: "▶";
+  font-size: 0.9rem;
+}
+
+.phone-screen .app-shell[data-view="today"] .hero-actions .primary-action {
+  gap: 0.55rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .score-summary-card .compact-focus {
+  background: #eef8ff !important;
+  border: 1px solid #bfe0f5 !important;
+  border-radius: 8px;
+  color: #19496b;
+  margin-top: 0.1rem;
+  padding: 0 !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .score-summary-card .compact-focus div {
+  border: 0 !important;
+  padding: 0.68rem 0.75rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel > .eyebrow {
+  color: var(--teal) !important;
+  display: block !important;
+  font-size: 0.78rem !important;
+  margin: 0 0 -0.55rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .assessment-step-panel h3::before {
+  content: "";
+}
+
+.phone-screen .app-shell[data-view="assess"] .measure-card {
+  gap: 0.6rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .measure-card .field > span {
+  color: #354b47 !important;
+  font-size: 0.9rem !important;
+  font-weight: 850 !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] #chairInput {
+  font-size: 3rem !important;
+  margin-top: 0.15rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .compact-action,
+.phone-screen .app-shell[data-view="assess"] #addRepBtn {
+  font-size: 0.88rem !important;
+  min-height: 2.7rem !important;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles button {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #d9ded9;
+  border-radius: 8px;
+  color: #1c3935;
+  display: grid;
+  font-size: 0.68rem;
+  font-weight: 750;
+  gap: 0.25rem;
+  justify-items: center;
+  line-height: 1.12;
+  min-height: 4.5rem;
+  padding: 0.42rem 0.26rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles button span {
+  background: #edf6ef;
+  border-radius: 999px;
+  height: 1.65rem;
+  position: relative;
+  width: 1.65rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles button span::before {
+  color: var(--teal);
+  content: "●";
+  font-size: 0.62rem;
+  left: 50%;
+  position: absolute;
+  top: 0.12rem;
+  transform: translateX(-50%);
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles button span::after {
+  background: var(--teal);
+  border-radius: 999px;
+  content: "";
+  height: 0.72rem;
+  left: 50%;
+  position: absolute;
+  top: 0.72rem;
+  transform: translateX(-50%);
+  width: 0.32rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-stage-tiles button.is-active {
+  background: #eaf5ef;
+  border-color: var(--teal);
+  box-shadow: inset 0 0 0 1px var(--teal);
+  color: var(--teal);
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-hold-stepper {
+  border: 1px solid #d8dcd8;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 2.7rem 1fr 2.7rem;
+  overflow: hidden;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-hold-stepper button {
+  background: #fffdf8;
+  border: 0;
+  color: var(--teal);
+  font-size: 1.25rem;
+  font-weight: 900;
+  min-height: 2.7rem;
+}
+
+.phone-screen .app-shell[data-view="assess"] .balance-hold-stepper span {
+  align-items: center;
+  border-left: 1px solid #d8dcd8;
+  border-right: 1px solid #d8dcd8;
+  color: #173430;
+  display: inline-flex;
+  font-weight: 850;
+  justify-content: center;
+}
+
+.phone-screen .workout-overview {
+  gap: 0.72rem !important;
+  padding: 0.82rem !important;
+}
+
+.phone-screen .workout-overview-intro {
+  align-items: center;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: minmax(0, 1fr) 6.4rem;
+}
+
+.phone-screen .workout-overview-intro h3 {
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.12;
+  margin: 0.1rem 0;
+}
+
+.phone-screen .workout-overview-intro p:not(.eyebrow) {
+  color: #3a514c;
+  font-size: 0.86rem;
+  line-height: 1.32;
+  margin: 0;
+}
+
+.phone-screen .workout-overview-intro img {
+  border-radius: 999px;
+  height: 6.1rem;
+  object-fit: cover;
+  width: 6.1rem;
+}
+
+.phone-screen .inline-link,
+.phone-screen #makeWorkoutEasierBtn {
+  color: var(--teal) !important;
+  font-size: 0.88rem !important;
+  font-weight: 850 !important;
+  text-decoration-thickness: 1px !important;
+}
+
+.phone-screen .workout-overview > .today-plan-main {
+  display: none !important;
+}
+
+.phone-screen .exercise-row {
+  grid-template-columns: 3.8rem minmax(0, 1fr) 1rem !important;
+  min-height: 4.62rem !important;
+  padding: 0.52rem !important;
+}
+
+.phone-screen .exercise-row::after {
+  color: #4d5b58;
+  content: "›";
+  font-size: 1.3rem;
+  justify-self: end;
+}
+
+.phone-screen .exercise-row img {
+  height: 3.55rem !important;
+  width: 3.55rem !important;
+}
+
+.phone-screen .exercise-row strong {
+  font-size: 0.9rem;
+  line-height: 1.1;
+}
+
+.phone-screen .exercise-row small {
+  font-size: 0.78rem;
+}
+
+.phone-screen .workout-active {
+  gap: 0.68rem !important;
+  padding: 0.8rem !important;
+}
+
+.phone-screen .active-exercise-layout {
+  align-items: center;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 8.4rem minmax(0, 1fr);
+}
+
+.phone-screen .workout-active .session-illustration {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  height: 8.4rem;
+  object-fit: cover;
+  object-position: center 42%;
+  width: 8.4rem;
+}
+
+.phone-screen .workout-active h3 {
+  font-size: 1.45rem !important;
+  line-height: 1.05 !important;
+  margin: 0.15rem 0 0.35rem !important;
+}
+
+.phone-screen .workout-active p:not(.eyebrow) {
+  color: #273f3b;
+  font-size: 0.9rem;
+  line-height: 1.32;
+  margin: 0;
+}
+
+.phone-screen .rep-counter {
+  padding: 0.52rem !important;
+}
+
+.phone-screen .rep-counter small {
+  font-size: 0.76rem;
+  margin-right: 0.42rem;
+}
+
+.phone-screen .rep-counter strong {
+  font-size: 2.35rem !important;
+}
+
+.phone-screen .workout-active .timer-primary {
+  min-height: 3.45rem !important;
+}
+
+.phone-screen .rep-actions {
+  display: grid;
+  gap: 0.62rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.phone-screen .rep-actions .primary-action,
+.phone-screen .rep-actions .secondary-action {
+  font-size: 0.95rem !important;
+  min-height: 3.3rem !important;
+  padding-inline: 0.55rem !important;
+}
+
+.phone-screen .rep-actions button:disabled {
+  background: #d9e4df !important;
+  border-color: #d9e4df !important;
+  box-shadow: none !important;
+  color: #71807c !important;
+  cursor: not-allowed;
+}
+
+.phone-screen .workout-control-actions {
+  gap: 0.55rem;
+}
+
+.phone-screen .workout-control-actions .secondary-action,
+.phone-screen .workout-control-actions .text-link {
+  font-size: 0.86rem !important;
+  min-height: 2.8rem !important;
+  padding-inline: 0.5rem !important;
+}
+
+.phone-screen .workout-paused {
+  gap: 0.72rem !important;
+  padding: 0.85rem !important;
+}
+
+.phone-screen .paused-summary {
+  padding: 0.72rem;
+}
+
+.phone-screen .reset-counter {
+  justify-self: center;
+  margin-top: -0.1rem;
+}
+
+.phone-screen .workout-active .action-list {
+  gap: 0.55rem !important;
+}
+
+.phone-screen .workout-active .action-list div {
+  background: #f5faf3 !important;
+  border-color: #dce9d8 !important;
+  padding: 0.72rem !important;
+}
+
+.phone-screen .progress-insight {
+  background: linear-gradient(180deg, #f5faef, #fffdf8) !important;
+  border-color: #d9e4ce !important;
+  display: grid !important;
+  gap: 0.68rem !important;
+  padding: 0.9rem !important;
+}
+
+.phone-screen .progress-insight h3 {
+  font-size: 1rem !important;
+  line-height: 1.15;
+}
+
+.phone-screen .progress-insight p {
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.phone-screen .metric-rows {
+  gap: 0 !important;
+  margin-top: 0.65rem !important;
+}
+
+.phone-screen .metric-rows div {
+  background: #fffdf8 !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e7dfd2 !important;
+  border-radius: 0 !important;
+  display: grid !important;
+  gap: 0.12rem 0.45rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0.62rem 0 !important;
+}
+
+.phone-screen .metric-rows div:last-child {
+  border-bottom: 0 !important;
+}
+
+.phone-screen .metric-rows strong {
+  font-size: 1.28rem;
+  grid-row: span 2;
+}
+
+.phone-screen .metric-rows small {
+  color: #4f705e;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.phone-screen #progressDetails {
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+.phone-screen #progressDetails:not([open]) {
+  display: block;
+  height: calc(3.25rem + 2px) !important;
+  max-height: calc(3.25rem + 2px) !important;
+  overflow: hidden !important;
+}
+
+.phone-screen #progressDetails:not([open]) > :not(summary) {
+  display: none !important;
+  margin: 0 !important;
+}
+
+.phone-screen #progressDetails summary {
+  min-height: 3.25rem;
+  padding: 0.82rem 1rem !important;
+}
+
+.phone-screen .app-shell[data-view="coach"] .sidebar {
+  min-height: 7.6rem !important;
+  padding-right: 7rem !important;
+}
+
+.phone-screen .app-shell[data-view="coach"] .sidebar::after {
+  left: 1.05rem;
+  right: 3.2rem;
+  text-align: left;
+}
+
+.phone-screen .app-shell[data-view="coach"] .sidebar::before {
+  display: none;
+}
+
+.phone-screen .app-shell[data-view="coach"] .sidebar .safety-note {
+  top: 0.95rem !important;
+}
+
+.phone-screen .app-shell[data-view="coach"] .sidebar::selection {
+  background: transparent;
+}
+
+.phone-screen .coach-grid {
+  gap: 0.7rem !important;
+}
+
+.phone-screen .coach-card {
+  grid-template-columns: 5.3rem minmax(0, 1fr) !important;
+  padding: 0.8rem !important;
+}
+
+.phone-screen .coach-card > img {
+  height: 5.1rem !important;
+  width: 5.1rem !important;
+}
+
+.phone-screen .coach-card h3 {
+  display: none;
+}
+
+.phone-screen .coach-card > div > .muted {
+  display: none;
+}
+
+.phone-screen .avatar-choice {
+  background: transparent !important;
+  border: 0 !important;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr 1fr !important;
+  margin: 0.35rem 0 0 !important;
+  padding: 0 !important;
+}
+
+.phone-screen .avatar-choice span {
+  display: none;
+}
+
+.phone-screen .coach-tabs {
+  grid-column: 1 / -1;
+  margin: 0.6rem 0 !important;
+}
+
+.phone-screen .coach-copy {
+  background: #eef8ff;
+  border: 1px solid #bfe0f5;
+  border-radius: 8px;
+  color: #173a58;
+  font-size: 0.9rem !important;
+  line-height: 1.42 !important;
+  margin: 0 !important;
+  padding: 0.85rem;
+}
+
+.phone-screen .coach-copy strong,
+.phone-screen .coach-copy span {
+  display: block;
+}
+
+.phone-screen .coach-copy strong {
+  margin-bottom: 0.35rem;
+}
+
+.phone-screen .evidence-panel summary {
+  min-height: 3.35rem;
+}
+
+.phone-screen #stopExerciseGuide {
+  border-color: #f0cd87 !important;
+}
+
+.phone-screen .completion-card {
+  gap: 0.7rem !important;
+  padding: 0.8rem !important;
+}
+
+.phone-screen .completion-illustration-frame {
+  aspect-ratio: 4 / 3;
+  background: #fffaf0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  max-height: 14.5rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.phone-screen .completion-illustration {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  clip-path: inset(8px round 8px);
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.02);
+  width: auto;
+}
+
+.phone-screen .completion-card h3 {
+  font-size: 1.25rem !important;
+  line-height: 1.18 !important;
+  margin: 0;
+}
+
+.phone-screen .app-shell[data-view="today"] .mini-stats {
+  gap: 0.72rem !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  margin-top: 0.85rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .mini-stats div {
+  align-content: start;
+  background: #fffaf0 !important;
+  border: 1px solid #e3d9c7 !important;
+  border-radius: 8px !important;
+  display: grid;
+  gap: 0.48rem;
+  min-height: 6.45rem;
+  padding: 0.72rem 0.78rem !important;
+}
+
+.phone-screen .app-shell[data-view="today"] .mini-stats dt {
+  color: #61706c;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+  min-height: 1.7rem;
+  text-transform: uppercase;
+}
+
+.phone-screen .app-shell[data-view="today"] .mini-stats dd {
+  color: var(--ink);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.95;
+  white-space: nowrap;
+}
+
+.phone-screen .workout-overview {
+  gap: 0.5rem;
+  padding: 0.85rem;
+}
+
+.phone-screen .workout-overview .today-plan-main {
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) 4.2rem;
+}
+
+.phone-screen .workout-overview .today-plan-main h3 {
+  font-size: 1.16rem;
+}
+
+.phone-screen .workout-overview .today-plan-main img {
+  height: 3.65rem;
+}
+
+.phone-screen .exercise-list {
+  gap: 0.5rem;
+}
+
+.phone-screen .exercise-row {
+  gap: 0.55rem;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  min-height: 4rem;
+  padding: 0.38rem;
+}
+
+.phone-screen .exercise-row img {
+  height: 3.25rem;
+  width: 3.25rem;
+}
+
+.phone-screen .exercise-row small {
+  font-size: 0.8rem;
+}
+
+.phone-screen .workout-overview .full-action {
+  min-height: 3.25rem;
+}
+
+.phone-screen .workout-overview .support-note {
+  padding: 0.62rem 0.75rem;
+}
+
+.phone-screen .sidebar {
+  position: relative;
+}
+
+.phone-screen .safety-note {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+}
+
+.phone-screen .safety-note span {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.phone-screen .safety-note .text-link {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  color: #eef9f5;
+  display: inline-flex;
+  font-size: 0;
+  height: 1.85rem;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  width: 1.85rem;
+}
+
+.phone-screen .safety-note .text-link::before {
+  content: "?";
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.phone-screen #alerts:not(:has(.danger)) {
+  display: none;
+}
+
+.phone-screen #alerts .alert:not(.danger) {
+  display: none;
+}
+
+.phone-screen .hero-copy {
+  min-height: 11.6rem;
+  padding: 0.9rem 0.9rem 0.9rem 5.65rem;
+}
+
+.phone-screen .hero-copy h2 {
+  font-size: 1.28rem !important;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-message {
+  font-size: 0.9rem;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-illustration {
+  height: 4rem !important;
+  top: 2.05rem;
+  width: 4rem;
+}
+
+.phone-screen .hero-actions .primary-action {
+  min-height: 3.15rem;
+}
+
+.phone-screen .today-plan-card {
+  gap: 0.72rem;
+  padding: 0.9rem;
+}
+
+.phone-screen .today-plan-main {
+  grid-template-columns: minmax(0, 1fr) 5rem;
+}
+
+.phone-screen .today-plan-main h3 {
+  font-size: 1.22rem;
+}
+
+.phone-screen .today-plan-main img {
+  height: 4.2rem;
+}
+
+.phone-screen .today-plan-card .full-action {
+  display: none;
+}
+
+.phone-screen .status-row {
+  padding: 0.72rem;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -65,6 +2136,7 @@ button {
   display: grid;
   grid-template-columns: 18rem minmax(0, 1fr);
   min-height: 100vh;
+  position: relative;
 }
 
 .sidebar {
@@ -2114,4 +4186,1043 @@ body {
   .exercise-visual {
     height: 6rem;
   }
+}
+
+/* v14 progressive-disclosure mockup implementation */
+.compact-heading {
+  align-items: start;
+}
+
+.quiet-action {
+  background: #fffdf8;
+  min-height: 2.55rem;
+  padding-inline: 0.9rem;
+}
+
+.full-action {
+  width: 100%;
+}
+
+.inline-link {
+  justify-self: center;
+  margin-inline: auto;
+}
+
+.score-reason {
+  color: #dbeee8;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin: 0.15rem 0 0;
+}
+
+.today-plan-card,
+.score-summary-card,
+.workout-overview,
+.workout-active,
+.workout-paused,
+.rest-card,
+.completion-card {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.today-plan-main {
+  align-items: center;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: minmax(0, 1fr) 6.8rem;
+}
+
+.today-plan-main h3 {
+  font-size: 1.35rem;
+  margin: 0.15rem 0;
+}
+
+.today-plan-main > img {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.status-row,
+.support-note {
+  background: #eaf6ef;
+  border: 1px solid #c8e5d5;
+  border-radius: 8px;
+  color: #20443b;
+  display: grid;
+  gap: 0.2rem;
+  line-height: 1.4;
+  padding: 0.8rem;
+}
+
+.status-row span,
+.support-note {
+  color: var(--muted);
+}
+
+.workout-control-actions {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.workout-control-actions .secondary-action,
+.workout-control-actions .text-link {
+  min-height: 2.85rem;
+}
+
+.paused-summary {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem;
+}
+
+.paused-summary span,
+.paused-summary small {
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.paused-summary strong {
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.15;
+}
+
+.summary-row {
+  align-items: center;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) 5.8rem;
+}
+
+.summary-row h3 {
+  align-items: baseline;
+  display: flex;
+  gap: 0.35rem;
+  margin: 0.2rem 0;
+}
+
+.summary-row h3 span {
+  color: var(--teal);
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.summary-row h3 small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.small-ring {
+  height: 5.8rem;
+  width: 5.8rem;
+}
+
+.score-interpretation {
+  background: #f6faef;
+  border: 1px solid #d8eacb;
+  border-radius: 8px;
+  color: #20443b;
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+  justify-content: space-between;
+  line-height: 1.42;
+  padding: 0.8rem;
+}
+
+.score-interpretation > strong {
+  color: var(--teal);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.compact-more-info {
+  flex: 0 0 auto;
+  min-height: 2.35rem;
+  padding: 0.45rem 0.75rem;
+  white-space: nowrap;
+}
+
+.modal-backdrop {
+  align-items: center;
+  background: rgba(13, 32, 29, 0.52);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 40;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: #fffdf8;
+  border: 1px solid #d9d0c1;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(17, 35, 31, 0.22);
+  color: var(--ink);
+  display: grid;
+  gap: 0.65rem;
+  max-height: min(34rem, calc(100vh - 2rem));
+  max-width: 24rem;
+  overflow: auto;
+  padding: 1rem;
+  position: relative;
+  width: min(100%, 24rem);
+}
+
+.modal-card:focus {
+  outline: 3px solid rgba(0, 109, 93, 0.25);
+  outline-offset: 3px;
+}
+
+.modal-card h2 {
+  color: var(--teal);
+  font-size: 1.2rem;
+  line-height: 1.15;
+  margin: 0;
+  padding-right: 2.2rem;
+}
+
+.modal-close {
+  align-items: center;
+  background: #eef7f1;
+  border: 1px solid #c8dfd4;
+  border-radius: 999px;
+  color: var(--teal);
+  cursor: pointer;
+  display: grid;
+  font-size: 1.35rem;
+  font-weight: 850;
+  height: 2rem;
+  line-height: 1;
+  place-items: center;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+  width: 2rem;
+}
+
+.modal-content {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.modal-content p {
+  color: #40504b;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.modal-info-grid {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.modal-info-grid div {
+  background: #f7fbf2;
+  border: 1px solid #d8eacb;
+  border-radius: 8px;
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.75rem;
+}
+
+.modal-info-grid span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.modal-info-grid strong {
+  color: #263631;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 520px) {
+  .score-interpretation {
+    align-items: stretch;
+    display: grid;
+  }
+
+  .compact-more-info {
+    justify-self: start;
+  }
+}
+
+.disclosure-card,
+.disclosure-panel {
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.disclosure-card summary,
+.disclosure-panel summary,
+.evidence-panel summary {
+  cursor: pointer;
+  font-weight: 850;
+  list-style: none;
+  padding: 0.85rem;
+}
+
+.disclosure-card summary::after,
+.disclosure-panel summary::after,
+.evidence-panel summary::after {
+  content: "›";
+  float: right;
+  font-size: 1.25rem;
+  transform: rotate(90deg);
+}
+
+.disclosure-card[open] summary::after,
+.disclosure-panel[open] summary::after,
+.evidence-panel[open] summary::after {
+  transform: rotate(-90deg);
+}
+
+.disclosure-card > :not(summary),
+.disclosure-panel > :not(summary) {
+  margin-inline: 0.85rem;
+}
+
+.disclosure-card > :last-child,
+.disclosure-panel > :last-child {
+  margin-bottom: 0.85rem;
+}
+
+.compact-focus {
+  border-top: 1px solid var(--line);
+  padding-top: 0.7rem;
+}
+
+.stepper {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.step-dot {
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: #40544f;
+  display: grid;
+  gap: 0.35rem;
+  min-height: 4.2rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.step-dot span {
+  align-items: center;
+  background: #edf5f0;
+  border-radius: 999px;
+  color: var(--teal);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 900;
+  height: 1.6rem;
+  justify-content: center;
+  justify-self: center;
+  width: 1.6rem;
+}
+
+.step-dot strong {
+  font-size: 0.75rem;
+}
+
+.step-dot.is-active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+}
+
+.step-dot.is-active span {
+  background: #fff3ba;
+  color: var(--teal);
+}
+
+.assessment-flow {
+  display: grid;
+}
+
+.assessment-step-panel {
+  display: none;
+}
+
+.assessment-step-panel.is-visible {
+  display: grid;
+  gap: 1rem;
+}
+
+.assessment-instruction {
+  color: #253f38;
+  font-size: 1.12rem;
+  font-weight: 750;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.timer-display {
+  background: #f9f2df;
+  border: 1px solid #eadba7;
+  border-radius: 8px;
+  color: var(--teal);
+  font-size: 3.25rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.timer-actions {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+}
+
+.timer-primary {
+  font-size: 1.08rem;
+  min-height: 4.5rem;
+}
+
+.setup-checks {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.setup-checks span {
+  align-items: center;
+  background: #edf7f1;
+  border: 1px solid #c9e6d3;
+  border-radius: 8px;
+  display: flex;
+  font-weight: 800;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.setup-checks span::before {
+  background: var(--teal);
+  border-radius: 999px;
+  color: white;
+  content: "✓";
+  display: inline-flex;
+  font-size: 0.75rem;
+  height: 1.35rem;
+  justify-content: center;
+  line-height: 1.35rem;
+  width: 1.35rem;
+}
+
+.measure-stack {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.measure-card {
+  background: #fffaf0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.85rem;
+}
+
+.assessment-summary {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.assessment-summary div {
+  align-items: center;
+  background: #edf7f1;
+  border: 1px solid #c9e6d3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.85rem;
+}
+
+.assessment-summary span {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.assessment-summary strong {
+  color: var(--teal);
+}
+
+.step-actions {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 0.8fr 1.2fr;
+  z-index: 6;
+}
+
+.workout-session {
+  display: grid;
+  gap: 1rem;
+}
+
+.exercise-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.exercise-row {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: inherit;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 4.8rem minmax(0, 1fr);
+  justify-items: start;
+  min-height: 5.8rem;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+.exercise-row img,
+.next-exercise img {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  height: 4.8rem;
+  object-fit: cover;
+  width: 4.8rem;
+}
+
+.next-exercise img {
+  height: 5rem;
+  width: 5rem;
+}
+
+.exercise-row span,
+.next-exercise span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.exercise-row small,
+.next-exercise small {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.session-progress {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.session-progress span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+.session-progress div {
+  background: #e2ebe6;
+  border-radius: 999px;
+  height: 0.6rem;
+  overflow: hidden;
+}
+
+.session-progress b {
+  background: linear-gradient(90deg, var(--teal), var(--yellow));
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+}
+
+.session-illustration {
+  aspect-ratio: 1.25;
+  border-radius: 8px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.rep-counter {
+  align-items: baseline;
+  background: #f9f2df;
+  border: 1px solid #eadba7;
+  border-radius: 8px;
+  color: var(--teal);
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  padding: 0.8rem;
+}
+
+.rep-counter small {
+  align-self: center;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 900;
+  margin-right: 0.55rem;
+  text-transform: uppercase;
+}
+
+.rep-counter strong {
+  font-size: 2.8rem;
+}
+
+.rep-counter span {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-weight: 850;
+}
+
+.next-exercise {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  padding: 0.75rem;
+}
+
+.completion-card {
+  text-align: center;
+}
+
+.completion-card .session-illustration {
+  justify-self: center;
+  max-width: 13rem;
+}
+
+.metric-rows {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.metric-rows div {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(9, 92, 88, 0.12);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 0.75rem;
+}
+
+.metric-rows span {
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.metric-rows strong {
+  color: var(--teal);
+}
+
+.progress-layout article {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.slim-alert {
+  padding: 0.75rem;
+}
+
+.app-shell[data-presenter-mode="true"] .presenter-controls {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+.phone-screen .coach-hero {
+  gap: 0.7rem;
+  padding: 0.8rem;
+}
+
+.phone-screen .hero-copy h2 {
+  font-size: 1.78rem;
+}
+
+.phone-screen .hero-actions {
+  margin-top: 0.7rem;
+}
+
+.phone-screen .hero-score-card {
+  min-height: auto;
+  padding: 0.75rem;
+}
+
+.phone-screen .hero-score-card .score-line span:first-child {
+  font-size: 2.35rem;
+}
+
+.phone-screen .hero-illustration {
+  display: none;
+}
+
+.phone-screen .score-reason {
+  display: none;
+}
+
+.phone-screen .stepper {
+  gap: 0.35rem;
+}
+
+.phone-screen .step-dot {
+  min-height: 3.35rem;
+  padding: 0.38rem;
+}
+
+.phone-screen .step-dot span {
+  font-size: 0.72rem;
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.phone-screen .step-dot strong {
+  font-size: 0.66rem;
+}
+
+.phone-screen .assessment-step-panel.is-visible {
+  gap: 0.72rem;
+}
+
+.phone-screen .assessment-instruction {
+  font-size: 1.02rem;
+}
+
+.phone-screen .timer-display {
+  font-size: 2.35rem;
+  padding: 0.8rem;
+}
+
+.phone-screen .avatar-choice {
+  grid-template-columns: 1fr 1fr;
+}
+
+.phone-screen .avatar-choice span {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 980px) {
+  .stepper {
+    grid-template-columns: repeat(5, minmax(3.6rem, 1fr));
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+  }
+
+  .step-dot {
+    min-width: 3.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .phone-screen .coach-hero {
+    gap: 0.7rem;
+    padding: 0.8rem;
+  }
+
+  .phone-screen .hero-copy h2 {
+    font-size: 1.78rem;
+  }
+
+  .phone-screen .hero-actions {
+    margin-top: 0.7rem;
+  }
+
+  .phone-screen .hero-score-card {
+    min-height: auto;
+    padding: 0.75rem;
+  }
+
+  .phone-screen .hero-score-card .score-line span:first-child {
+    font-size: 2.35rem;
+  }
+
+  .phone-screen .hero-illustration {
+    display: none;
+  }
+
+  .phone-screen .score-reason {
+    display: none;
+  }
+
+  .today-plan-main,
+  .summary-row {
+    grid-template-columns: minmax(0, 1fr) 5.4rem;
+  }
+
+  .step-dot strong {
+    font-size: 0.68rem;
+  }
+
+  .timer-display {
+    font-size: 2.8rem;
+  }
+}
+
+/* v20 final mockup-fidelity overrides. Keep this block last. */
+@media (min-width: 760px) {
+  body {
+    background:
+      radial-gradient(circle at 12% 12%, rgba(243, 198, 79, 0.18), transparent 18rem),
+      radial-gradient(circle at 85% 86%, rgba(17, 128, 111, 0.12), transparent 24rem),
+      #f8f4ec;
+    padding: 1.75rem;
+  }
+
+  .phone-frame {
+    aspect-ratio: 390 / 844;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+    max-height: calc(100vh - 3.5rem);
+    padding: 0 !important;
+    width: min(390px, calc(100vw - 2rem));
+  }
+
+  .phone-frame::before,
+  .phone-frame::after {
+    display: none !important;
+  }
+
+  .phone-screen {
+    background: var(--bg);
+    border: 1px solid rgba(20, 50, 48, 0.1);
+    border-radius: 16px !important;
+    box-shadow: 0 18px 44px rgba(53, 45, 28, 0.14);
+    overflow: auto;
+  }
+
+  .phone-screen .sidebar {
+    border-radius: 16px 16px 0 0;
+    padding: 1rem !important;
+  }
+}
+
+.phone-screen .presenter-controls {
+  background: rgba(16, 38, 37, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  bottom: calc(var(--bottom-nav-space) + 0.9rem);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  left: 0.85rem;
+  max-height: min(22rem, 58vh);
+  overflow: auto;
+  position: absolute;
+  right: 0.85rem;
+  z-index: 30;
+}
+
+.phone-screen .coach-hero {
+  background: transparent !important;
+  box-shadow: none;
+  color: var(--ink);
+  grid-template-columns: 1fr;
+  padding: 0;
+}
+
+.phone-screen .coach-hero::after,
+.phone-screen .hero-score-card {
+  display: none !important;
+}
+
+.phone-screen .hero-copy {
+  background: rgba(255, 253, 248, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(53, 45, 28, 0.08);
+  min-height: 8.9rem;
+  padding: 1rem 1rem 1rem 5.8rem;
+  position: relative;
+}
+
+.phone-screen .hero-copy .eyebrow,
+.phone-screen .coach-hero .eyebrow {
+  color: var(--muted) !important;
+}
+
+.phone-screen .hero-copy h2 {
+  color: var(--teal);
+  font-size: 1.35rem !important;
+  line-height: 1.1;
+  max-width: 11rem;
+}
+
+.phone-screen .hero-message {
+  color: #334541;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  max-width: 13rem;
+}
+
+.phone-screen .hero-illustration {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 999px;
+  display: block !important;
+  height: 4.25rem !important;
+  left: 1rem;
+  object-fit: cover;
+  position: absolute;
+  top: 2.25rem;
+  width: 4.25rem;
+  z-index: 3;
+}
+
+.phone-screen .hero-actions {
+  margin-top: 0.8rem;
+}
+
+.phone-screen .hero-actions .primary-action {
+  align-items: center;
+  display: flex;
+  font-size: 1.02rem;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.45rem;
+}
+
+.phone-screen #view-today .section-heading {
+  display: none;
+}
+
+.phone-screen .today-plan-card {
+  background: #f6faef;
+}
+
+.phone-screen .today-plan-main img {
+  height: 4.9rem;
+}
+
+.phone-screen .score-summary-card .summary-row {
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+}
+
+.phone-screen .score-summary-card .summary-row > div:first-child {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.phone-screen .score-summary-card .small-ring {
+  grid-column: 1;
+  grid-row: 1;
+  height: 4.25rem;
+  width: 4.25rem;
+}
+
+/* v21 first-screen fidelity refinements. Keep this block after all other overrides. */
+.phone-screen .sidebar {
+  position: relative;
+}
+
+.phone-screen .safety-note {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 1rem;
+  top: 1.25rem;
+}
+
+.phone-screen .safety-note span {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.phone-screen .safety-note .text-link {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  color: #eef9f5;
+  display: inline-flex;
+  font-size: 0;
+  height: 1.85rem;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  width: 1.85rem;
+}
+
+.phone-screen .safety-note .text-link::before {
+  content: "?";
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.phone-screen #alerts:not(:has(.danger)) {
+  display: none;
+}
+
+.phone-screen #alerts .alert:not(.danger) {
+  display: none;
+}
+
+.phone-screen .hero-copy {
+  min-height: 11.6rem;
+  padding: 0.9rem 0.9rem 0.9rem 5.65rem;
+}
+
+.phone-screen .hero-copy h2 {
+  font-size: 1.28rem !important;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-message {
+  font-size: 0.9rem;
+  max-width: 14rem;
+}
+
+.phone-screen .hero-illustration {
+  height: 4rem !important;
+  top: 2.05rem;
+  width: 4rem;
+}
+
+.phone-screen .hero-actions .primary-action {
+  min-height: 3.15rem;
+}
+
+.phone-screen .today-plan-card {
+  gap: 0.72rem;
+  padding: 0.9rem;
+}
+
+.phone-screen .today-plan-main {
+  grid-template-columns: minmax(0, 1fr) 5rem;
+}
+
+.phone-screen .today-plan-main h3 {
+  font-size: 1.22rem;
+}
+
+.phone-screen .today-plan-main img {
+  height: 4.2rem;
+}
+
+.phone-screen .today-plan-card .full-action {
+  display: none;
+}
+
+.phone-screen .status-row {
+  padding: 0.72rem;
 }

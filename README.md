@@ -11,9 +11,9 @@ Frailty Coach helps older adults safely assess their physical resilience, unders
 ## Key Features
 
 - **Function Resilience Score**: a simple 0-100 wellness score summarizing mobility, strength, balance, activity, recovery, and fall-risk signals.
-- **Score breakdown**: shows which domains are pulling the score up or down so the user understands what to work on next.
+- **Score interpretation and breakdown**: explains the 0-100 score in plain language, gives encouragement, and shows which domains are pulling the score up or down.
 - **Guided frailty and fall-risk checks**: safety screen, fall-risk questions, Timed Up and Go, chair stands, balance stage, gait speed, and measurement confidence.
-- **Adaptive daily workout plans**: exercises matched to ability level, with setup, action, and safety cues on every workout card.
+- **Adaptive daily workout sessions**: a simple overview leads into a guided exercise session with setup, action, rest, and safety cues.
 - **Guided Companion visual design**: a warm elder-friendly interface with deep green navigation, ivory surfaces, large controls, and app-ready wellness illustrations.
 - **Coach avatar preference**: users can choose a female or male East Asian coach avatar, with the selected visual style applied to the hero and workout artwork.
 - **Wearable-style insights**: uses steps, active minutes, sleep, resting heart rate, walking speed, and recovery signals to adjust recommendations.
@@ -31,19 +31,19 @@ The app is designed to be used every day, with the daily workout as the main hab
 
 The intended loop is:
 
-1. Open **Today** to see the current score, safety state, and daily focus.
-2. Complete **Workout** daily and mark it done.
+1. Open **Today** to see the high-level plan, safety state, and why the plan matters.
+2. Tap **Do today's workout** and complete the guided **Workout** session.
 3. Use **Assess** weekly or when function changes to refresh the score and adapt the plan.
-4. Review **Progress** to understand what changed and what to focus on next.
-5. Open **Coach** for plain-language summaries, the optional app walkthrough, and evidence details.
+4. Review **Progress** for a plain-language interpretation first, with detailed trends available on demand.
+5. Open **Coach** for avatar preference, plain-language summaries, the optional app walkthrough, safety guidance, and evidence details.
 
 ## App Screens
 
-- **Today**: the main home screen with the user’s current score, score breakdown, coaching message, safety alerts, wearable signal, and daily focus.
-- **Assess**: guided safety, fall-risk, and functional checks with expandable instructions for how to run each check.
-- **Workout**: the adaptive daily exercise plan for the user’s current ability band, with setup, action, and watch-out cues.
-- **Progress**: trend view showing how score and functional metrics change over time, plus a plain-language interpretation of what to do next.
-- **Coach**: plain-language summaries for the older adult and caregiver/PT, coach avatar preference, plus the optional app walkthrough and Evidence & Sources disclosure.
+- **Today**: simplified daily command center with one primary workout action, high-level plan summary, safety state, plain-language score coaching, and collapsed score/wearable details.
+- **Assess**: one-step-at-a-time safety, fall-risk, TUG, chair-stand, balance, gait-speed, confidence, and save/update-plan flow.
+- **Workout**: guided daily session with overview, active exercise, setup/safety detail, rest state, and completion state.
+- **Progress**: plain-language interpretation and next action first, with detailed four-week trends tucked behind disclosure.
+- **Coach**: plain-language summaries for the older adult and caregiver/PT, coach avatar preference, optional walkthrough, stop-exercise guidance, and Evidence & Sources disclosure.
 
 ## Scientific Positioning
 
@@ -53,7 +53,9 @@ The `Function Resilience Score` is a product composite for coaching and visualiz
 
 ## Visual Design
 
-The current app uses the **Guided Companion** direction from the saved mockups in `design/mockups/frailty-coach-2026-07-06/`. It is intentionally warmer and more welcoming than a clinical dashboard while preserving safety, evidence, and caregiver credibility.
+The current app targets the **Frailty Coach v2** boards in `design/mockups/frailty-coach-v2/`. These are the source of truth for the simplified daily-use direction: a clearer Today screen, guided assessment, workout-session flow, progressive detail disclosure, and quiet presenter tooling.
+
+The earlier **Guided Companion** concept directions remain in `design/mockups/frailty-coach-2026-07-06/` for historical reference.
 
 Generated app assets live in `assets/illustrations/`:
 
@@ -108,10 +110,31 @@ npm start
 Then open the normal audience-facing app:
 
 ```text
-http://localhost:5173/?v=12
+http://localhost:5173/?v=60
 ```
 
 This mode hides demo controls and starts as a realistic enrolled-user experience.
+
+Profile numbers reset to the fixed seeded defaults on every fresh app startup. Changes made during a running demo, such as saved assessments, completed workouts, or simulated progress, are kept in memory while the app remains open so the current demo flow stays coherent. Refreshing or reopening the app starts again from the default seeded numbers.
+
+## Deploy to GitHub Pages
+
+This repository includes a GitHub Actions workflow at `.github/workflows/pages.yml` that publishes the static app to GitHub Pages whenever `main` is pushed.
+
+For this repo, the public URL should be:
+
+```text
+https://cst-labs.github.io/frailty-coach/
+```
+
+To enable it in GitHub:
+
+1. Open the repository on GitHub.
+2. Go to **Settings** > **Pages**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Push to `main`, or run the **Deploy GitHub Pages** workflow manually from the **Actions** tab.
+
+The workflow runs `npm test`, prepares a small static artifact with only the app runtime files, and deploys that artifact to Pages.
 
 ## Presentation Modes
 
@@ -122,7 +145,7 @@ Frailty Coach has two presentation modes:
 Use this for the polished app walkthrough:
 
 ```text
-http://localhost:5173/?v=12
+http://localhost:5173/?v=60
 ```
 
 Normal mode hides:
@@ -138,7 +161,7 @@ The app still uses deterministic seeded data for the MVP, but the UI does not ex
 Use this when you need live demo controls:
 
 ```text
-http://localhost:5173/?demo=1&v=12
+http://localhost:5173/?demo=1&v=60
 ```
 
 Presenter mode shows a **Presenter controls** panel in the sidebar with:
@@ -157,9 +180,9 @@ This toggles Presenter controls on or off without changing the URL. Use this dur
 
 ### Suggested Demo Flow
 
-1. Start at `http://localhost:5173/?v=12` for the audience-facing walkthrough.
+1. Start at `http://localhost:5173/?v=60` for the audience-facing walkthrough.
 2. Show Today, Assess, Workout, Progress, and Coach as the real app experience.
-3. Press `Shift + D` or switch to `http://localhost:5173/?demo=1&v=12` when you need presenter tools.
+3. Press `Shift + D` or switch to `http://localhost:5173/?demo=1&v=60` when you need presenter tools.
 4. Choose a scenario if needed.
 5. Select **Simulate 4 weeks** to show improvement over time.
 6. Use **Reset scenario** before rehearsing or starting the next demo.
@@ -172,4 +195,4 @@ npm test
 
 ## Documentation Maintenance
 
-Keep this README updated whenever product behavior, screens, scoring logic, evidence positioning, or demo flow changes. At minimum, update the **Key Features**, **App Screens**, and **Scientific Positioning** sections when those areas change.
+Keep this README and [CHANGELOG.md](/Users/tanchorseng/Desktop/Main%20Projects/Healthcare/Codex%20for%20Healthcare/CHANGELOG.md) updated whenever product behavior, screens, scoring logic, evidence positioning, or demo flow changes. At minimum, update the **Key Features**, **App Screens**, **Scientific Positioning**, and changelog sections when those areas change.
