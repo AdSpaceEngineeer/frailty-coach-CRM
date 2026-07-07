@@ -6,8 +6,8 @@ import {
   getWorkoutPlan,
   isWorkoutCompleteToday,
   makeHistoryWithCurrent
-} from "./logic.js?v=61";
-import { fallQuestions, personas, safetyQuestions } from "./data.js?v=61";
+} from "./logic.js?v=62";
+import { fallQuestions, personas, safetyQuestions } from "./data.js?v=62";
 
 const AVATAR_STORAGE_KEY = "frailty-coach-avatar-preference-v1";
 const ASSET_SETS = {
@@ -80,6 +80,7 @@ function bindEvents() {
 
   $("#startCheckBtn").addEventListener("click", handleTodayPrimaryAction);
   $("#todayWorkoutBtn").addEventListener("click", handleTodayPrimaryAction);
+  $("#screenBackBtn").addEventListener("click", () => showView("today"));
   $("#evidenceLinkBtn").addEventListener("click", () => showEvidenceSources());
   $("#assessmentBackBtn").addEventListener("click", () => moveAssessmentStep(-1));
   $("#assessmentNextBtn").addEventListener("click", () => moveAssessmentStep(1));

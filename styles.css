@@ -259,17 +259,6 @@
   position: relative !important;
 }
 
-.phone-screen .app-shell[data-view="assess"] .sidebar::before {
-  color: white;
-  content: "‹";
-  font-size: 2.35rem;
-  font-weight: 300;
-  left: 0.82rem;
-  line-height: 1;
-  position: absolute;
-  top: 1.04rem;
-}
-
 .phone-screen .app-shell[data-view="assess"] .sidebar::after {
   color: white;
   content: "Assessment\A About 5 minutes · Do weekly";
@@ -1288,6 +1277,35 @@
   background: #eaf4ee !important;
 }
 
+.phone-screen .screen-back-btn {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  font-size: 2.35rem;
+  font-weight: 300;
+  height: 2.35rem;
+  justify-content: center;
+  left: 0.72rem;
+  line-height: 1;
+  padding: 0;
+  position: absolute;
+  top: 1rem;
+  width: 2.35rem;
+  z-index: 3;
+}
+
+.phone-screen .screen-back-btn:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}
+
+.phone-screen .app-shell:not([data-view="today"]) .screen-back-btn {
+  display: flex;
+}
+
 .phone-screen .app-shell[data-view="plan"] .sidebar,
 .phone-screen .app-shell[data-view="progress"] .sidebar,
 .phone-screen .app-shell[data-view="coach"] .sidebar {
@@ -1318,18 +1336,6 @@
   text-align: center;
   top: 1.08rem;
   white-space: pre;
-}
-
-.phone-screen .app-shell[data-view="plan"] .sidebar::before,
-.phone-screen .app-shell[data-view="coach"] .sidebar::before {
-  color: #fff;
-  content: "‹";
-  font-size: 2.2rem;
-  font-weight: 300;
-  left: 0.92rem;
-  line-height: 1;
-  position: absolute;
-  top: 1.15rem;
 }
 
 .phone-screen .app-shell[data-view="plan"] .brand-block,

@@ -248,7 +248,7 @@ Say instead:
 
 If the live site is slow or the workflow is updating:
 
-1. Use local app: `http://localhost:5173/?v=61`.
+1. Use local app: `http://localhost:5173/?v=62`.
 2. Start at **Today**.
 3. Avoid presenter mode unless needed.
 4. Use the saved mockups in `design/mockups/frailty-coach-v2/` as visual backup.
