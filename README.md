@@ -2,7 +2,7 @@
 
 Frailty Coach is a mobile-first wellness app that helps older adults monitor physical resilience, understand frailty and fall-risk signals, and follow adaptive daily exercise plans that improve strength, balance, mobility, and confidence over time.
 
-It is built for the [Codex for Healthcare: From Prototype to Production](https://luma.com/6s8sbqep) hackathon under the **Healthy Longevity** theme. The strongest alignment is with **Physical health and frailty**, **Care for older adults**, **Longevity data and insights**, **Preventive care and early intervention**, and **Patient engagement**.
+It is built for the [Codex for Healthcare: From Prototype to Production](https://luma.com/6s8sbqep) hackathon. The submission is specifically based on the **Physical Health and Frailty** build direction under the broader **Healthy Longevity** theme. It also connects to **Care for older adults**, **Longevity data and insights**, **Preventive care and early intervention**, and **Patient engagement**.
 
 Frailty Coach is not a diagnostic or regulated medical-device implementation. It is a wellness-oriented coaching prototype with safety prompts, evidence-informed functional domains, and clinician/caregiver escalation cues.
 
@@ -11,8 +11,9 @@ Frailty Coach is not a diagnostic or regulated medical-device implementation. It
 | Field | Submission summary |
 | --- | --- |
 | **Event** | [Codex for Healthcare: From Prototype to Production](https://luma.com/6s8sbqep) |
-| **Theme** | Healthy Longevity |
-| **Primary health domain** | Physical health and frailty |
+| **Hackathon umbrella theme** | Healthy Longevity |
+| **Submission theme / build direction** | Physical Health and Frailty |
+| **Primary health domain** | Mobility, strength, balance, gait, activity, recovery, and fall-risk support for older adults |
 | **Secondary domains** | Care for older adults; patient engagement; preventive care and early intervention; longevity data and insights |
 | **Target users** | Older adults who want to stay steady and independent; caregivers, physiotherapists, and community health teams supporting them |
 | **Prototype URL** | https://cst-labs.github.io/frailty-coach/ |
@@ -37,16 +38,16 @@ Frailty Coach turns periodic functional check-ins into a daily movement loop:
 
 The product goal is not to replace clinical judgement. It is to make healthy-ageing behaviours easier to understand, safer to perform, and more likely to become a daily habit.
 
-## Hackathon Theme Alignment
+## Physical Health and Frailty Alignment
 
 | Hackathon direction | How Frailty Coach addresses it |
 | --- | --- |
+| **Physical Health and Frailty** | The core submission theme. Frailty Coach focuses directly on mobility, leg strength, balance, gait, activity, recovery, and fall-risk precautions. |
 | **Preventive care and early intervention** | Screens for fall-risk signals and guides low-risk daily movement before decline becomes a crisis. |
 | **Patient engagement** | Prioritises one clear daily action, plain-language score interpretation, encouragement after completion, and caregiver-friendly summaries. |
 | **Longevity data and insights** | Combines functional checks, fall-risk answers, wearable-style activity, sleep, heart-rate recovery, and adherence into actionable coaching. |
 | **Healthy ageing assistants** | Provides an app-like companion that explains what to do today, when to reassess, and how to adapt movement safely. |
 | **Care for older adults** | Designs around safety, independence, support needs, caregiver visibility, and an elder-friendly interface. |
-| **Physical health and frailty** | Focuses directly on mobility, leg strength, balance, gait, activity, recovery, and fall-risk precautions. |
 
 ## One-Sentence Pitch
 

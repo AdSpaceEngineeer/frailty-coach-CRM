@@ -13,7 +13,8 @@ This project currently uses cache-busting app URLs such as `?v=65`; those are bu
 ### Changed
 
 - Updated README positioning for the Codex for Healthcare: From Prototype to Production hackathon.
-- Added Healthy Longevity theme alignment, problem framing, solution loop, implemented scope, and prototype boundaries.
+- Clarified that the submission is based on the Physical Health and Frailty build direction under the broader Healthy Longevity theme.
+- Added theme alignment, problem framing, solution loop, implemented scope, and prototype boundaries.
 
 ## 2026-07-08 - Flexible Assessment Timing
 
