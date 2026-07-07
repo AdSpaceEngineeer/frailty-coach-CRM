@@ -3,7 +3,8 @@ import {
   applyFourWeekProgress,
   completeWorkout,
   computeFunctionScore,
-  getWorkoutPlan
+  getWorkoutPlan,
+  recordAssessment
 } from "../src/logic.js";
 import { personas } from "../src/data.js";
 
@@ -57,9 +58,21 @@ function testWorkoutCompletionUpdatesActivity() {
   assert.equal(repeatedState.wearable.steps, afterState.wearable.steps);
 }
 
+function testAssessmentRecordingUpdatesSameDay() {
+  const state = clone(personas.grace);
+  const score = computeFunctionScore(state);
+  const firstSave = recordAssessment(state, score, new Date(2026, 6, 8));
+  const secondSave = recordAssessment(firstSave, score, new Date(2026, 6, 8));
+  const todayEntries = secondSave.history.filter((entry) => entry.date === "2026-07-08");
+
+  assert.equal(todayEntries.length, 1);
+  assert.equal(todayEntries[0].score, score.total);
+}
+
 testPersonaOrdering();
 testBlockingSafetyRoutesToSeatedPlan();
 testProgressImprovesScore();
 testWorkoutCompletionUpdatesActivity();
+testAssessmentRecordingUpdatesSameDay();
 
 console.log("logic tests passed");

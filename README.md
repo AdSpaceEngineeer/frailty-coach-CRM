@@ -18,7 +18,7 @@ Frailty Coach helps older adults safely assess their physical resilience, unders
 - **Coach avatar preference**: users can choose a female or male East Asian coach avatar, with the selected visual style applied to the hero and workout artwork.
 - **Wearable-style insights**: uses steps, active minutes, sleep, resting heart rate, walking speed, and recovery signals to adjust recommendations.
 - **Safety-aware coaching**: flags red-flag symptoms, fall-risk concerns, poor recovery, and missed sessions, then recommends supervision or deloading when needed.
-- **Progress tracking**: interprets changes in score, TUG time, chair stands, and balance stage, then points the user back to the next useful action.
+- **Progress tracking**: saves each assessment check-in, plots irregular assessment points over the last 3 months, interprets changes in score, TUG time, chair stands, and balance stage, then points the user back to the next useful action.
 - **Plain-language coach summaries**: separate explanations for the older adult and for a caregiver or physiotherapist.
 - **Hidden walkthrough**: a collapsed Coach section explains daily use, periodic assessments, and progress review without forcing first-time onboarding.
 - **Evidence & Sources section**: compact source panel explaining the clinical and scientific basis behind the assessments and workouts.
@@ -27,14 +27,14 @@ Frailty Coach helps older adults safely assess their physical resilience, unders
 
 ## Daily Use Model
 
-The app is designed to be used every day, with the daily workout as the main habit. Assessments are intentionally less frequent: users refresh their function checks once a week, or every few days if mobility, confidence, symptoms, or support needs change.
+The app is designed to be used every day, with the daily workout as the main habit. Assessments are intentionally less frequent and flexible: the app suggests a weekly check-in, but users can assess every few days, after 1-2 busy weeks, or whenever mobility, confidence, symptoms, or support needs change.
 
 The intended loop is:
 
 1. Open **Today** to see the high-level plan, safety state, and why the plan matters.
 2. Tap **Do today's workout** and complete the guided **Workout** session.
-3. Use **Assess** weekly or when function changes to refresh the score and adapt the plan.
-4. Review **Progress** for a plain-language interpretation first, with detailed trends available on demand.
+3. Use **Assess** when useful to refresh the score and adapt the plan. The app shows when the last assessment was saved and prompts a check-in if it has been over a week.
+4. Review **Progress** for a plain-language interpretation first, with detailed last-3-month trends available on demand.
 5. Open **Coach** for avatar preference, plain-language summaries, the optional app walkthrough, safety guidance, and evidence details.
 
 ## App Screens
@@ -42,7 +42,7 @@ The intended loop is:
 - **Today**: simplified daily command center with one primary workout action, high-level plan summary, safety state, plain-language score coaching, and collapsed score/wearable details.
 - **Assess**: one-step-at-a-time safety, fall-risk, TUG, chair-stand, balance, gait-speed, confidence, and save/update-plan flow.
 - **Workout**: guided daily session with overview, active exercise, setup/safety detail, rest state, and completion state.
-- **Progress**: plain-language interpretation and next action first, with detailed four-week trends tucked behind disclosure.
+- **Progress**: plain-language interpretation and next action first, with detailed last-3-month assessment trends tucked behind disclosure.
 - **Coach**: plain-language summaries for the older adult and caregiver/PT, coach avatar preference, optional walkthrough, stop-exercise guidance, and Evidence & Sources disclosure.
 
 ## Scientific Positioning
@@ -110,7 +110,7 @@ npm start
 Then open the normal audience-facing app:
 
 ```text
-http://localhost:5173/?v=63
+http://localhost:5173/?v=65
 ```
 
 This mode hides demo controls and starts as a realistic enrolled-user experience.
@@ -145,7 +145,7 @@ Frailty Coach has two presentation modes:
 Use this for the polished app walkthrough:
 
 ```text
-http://localhost:5173/?v=63
+http://localhost:5173/?v=65
 ```
 
 Normal mode hides:
@@ -161,7 +161,7 @@ The app still uses deterministic seeded data for the MVP, but the UI does not ex
 Use this when you need live demo controls:
 
 ```text
-http://localhost:5173/?demo=1&v=63
+http://localhost:5173/?demo=1&v=65
 ```
 
 Presenter mode shows a **Presenter controls** panel in the sidebar with:
@@ -180,9 +180,9 @@ This toggles Presenter controls on or off without changing the URL. Use this dur
 
 ### Suggested Demo Flow
 
-1. Start at `http://localhost:5173/?v=63` for the audience-facing walkthrough.
+1. Start at `http://localhost:5173/?v=65` for the audience-facing walkthrough.
 2. Show Today, Assess, Workout, Progress, and Coach as the real app experience.
-3. Press `Shift + D` or switch to `http://localhost:5173/?demo=1&v=63` when you need presenter tools.
+3. Press `Shift + D` or switch to `http://localhost:5173/?demo=1&v=65` when you need presenter tools.
 4. Choose a scenario if needed.
 5. Select **Simulate 4 weeks** to show improvement over time.
 6. Use **Reset scenario** before rehearsing or starting the next demo.

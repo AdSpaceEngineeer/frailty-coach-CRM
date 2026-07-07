@@ -261,7 +261,7 @@
 
 .phone-screen .app-shell[data-view="assess"] .sidebar::after {
   color: white;
-  content: "Assessment\A About 5 minutes · Do weekly";
+  content: "Assessment\A About 5 minutes · Anytime";
   font-size: 1.08rem;
   font-weight: 900;
   line-height: 1.16;
@@ -2822,7 +2822,7 @@ dd,
   align-items: end;
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
   height: 18rem;
   padding-top: 1rem;
 }

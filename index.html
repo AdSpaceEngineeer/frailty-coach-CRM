@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0b5c5a" />
     <title>Frailty Coach</title>
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css?v=63" />
+    <link rel="stylesheet" href="./styles.css?v=65" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -145,7 +145,7 @@
                   <div>
                     <p class="eyebrow">Guided assessment</p>
                     <h2 id="assessTitle">Assessment</h2>
-                    <p class="section-note">About 5 minutes · Do weekly, or sooner if mobility changes.</p>
+                    <p class="section-note">About 5 minutes · Suggested weekly, available anytime.</p>
                   </div>
                 </div>
 
@@ -265,7 +265,7 @@
                     </label>
                     <button id="saveAssessmentBtn" class="primary-action full-action" type="button">Save and update plan</button>
                     <button id="reviewAnswersBtn" class="text-link review-answers" type="button">Review answers</button>
-                    <p class="muted next-assessment-note">Next assessment in 7 days unless mobility changes.</p>
+                    <p class="muted next-assessment-note">Weekly is a guide. Save a new assessment anytime your function changes or you want an update.</p>
                   </article>
                 </div>
 
@@ -291,7 +291,7 @@
                 <div class="section-heading compact-heading">
                   <div>
                     <p class="eyebrow">Progress</p>
-                    <h2 id="progressTitle">This week: safer and steadier</h2>
+                    <h2 id="progressTitle">Progress over time</h2>
                   </div>
                 </div>
                 <article id="progressInsight" class="story-card progress-insight" aria-live="polite"></article>
@@ -300,7 +300,7 @@
                   <div class="progress-layout">
                     <article>
                       <h3>Score trend</h3>
-                      <div id="scoreChart" class="bar-chart" aria-label="Weekly function score trend"></div>
+                      <div id="scoreChart" class="bar-chart" aria-label="Function score trend over the last 3 months"></div>
                     </article>
                     <article>
                       <h3>Functional change</h3>
@@ -356,8 +356,8 @@
                         <p>Open Today to see the plan, then complete the Workout session. Mark the workout done when finished.</p>
                       </div>
                       <div class="source-group">
-                        <h3>Once a week or every few days</h3>
-                        <p>Use Assess to refresh the function score. The app adjusts workout level, support, and progression from the latest checks.</p>
+                        <h3>Every week or whenever useful</h3>
+                        <p>Use Assess to refresh the function score. Weekly is suggested, but you can save a check-in anytime and the app adds it to Progress.</p>
                       </div>
                       <div class="source-group">
                         <h3>When reviewing progress</h3>
@@ -461,6 +461,6 @@
     </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
-    <script type="module" src="./src/app.js?v=63"></script>
+    <script type="module" src="./src/app.js?v=65"></script>
   </body>
 </html>

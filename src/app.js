@@ -3,11 +3,14 @@ import {
   buildCoachCopy,
   completeWorkout,
   computeFunctionScore,
+  daysSinceAssessment,
   getWorkoutPlan,
   isWorkoutCompleteToday,
-  makeHistoryWithCurrent
-} from "./logic.js?v=63";
-import { fallQuestions, personas, safetyQuestions } from "./data.js?v=63";
+  localDateKey,
+  makeHistoryWithCurrent,
+  recordAssessment
+} from "./logic.js?v=65";
+import { fallQuestions, personas, safetyQuestions } from "./data.js?v=65";
 
 const AVATAR_STORAGE_KEY = "frailty-coach-avatar-preference-v1";
 const ASSET_SETS = {
@@ -99,14 +102,16 @@ function bindEvents() {
 
   $("#saveAssessmentBtn").addEventListener("click", () => {
     readAssessmentForm();
+    appState = recordAssessment(appState, computeFunctionScore(appState));
     saveState();
     render();
-    toast("Assessment saved and plan updated");
+    toast("Assessment saved to Progress");
     showView("today");
   });
 
   $("#demoProgressBtn").addEventListener("click", () => {
     appState = applyFourWeekProgress(appState);
+    appState = recordAssessment(appState, computeFunctionScore(appState));
     saveState();
     render();
     toast("Four-week progress simulated");
@@ -239,6 +244,8 @@ function renderToday(score, plan) {
   const weakest = weakestDomain(score);
   const workoutDone = isWorkoutCompleteToday(appState);
   const workoutPaused = isWorkoutPaused();
+  const assessmentDays = daysSinceAssessment(appState.history);
+  const assessmentDue = assessmentDays === null || assessmentDays > 7;
   $("#todayPlanTitle").textContent = planShortName(score.band);
   $("#todayPlanMeta").textContent = `${workoutDuration(plan)} · ${score.status.shouldSupervise ? "Support nearby" : "Move independently"}`;
   $("#todayPlanImage").src = exerciseImageFor(plan.exercises[0]?.name || "");
@@ -268,7 +275,10 @@ function renderToday(score, plan) {
   $("#completeWorkoutBtn").textContent = workoutDone ? "Done today" : "Mark done";
   $("#completeWorkoutBtn").disabled = workoutDone;
   $("#todayFocus").innerHTML = `
-    <div><strong>Next check</strong><span>Update assessment weekly, or sooner if mobility changes.</span></div>
+    <div class="${assessmentDue ? "is-due" : ""}">
+      <strong>${assessmentDue ? "Assessment check-in due" : "Last assessment"}</strong>
+      <span>${assessmentStatusCopy(assessmentDays)}</span>
+    </div>
   `;
 }
 
@@ -709,6 +719,7 @@ function bindWorkoutControlActions() {
 }
 
 function renderWorkoutComplete() {
+  const assessmentDays = daysSinceAssessment(appState.history);
   $("#workoutPlan").innerHTML = `
     <article class="panel completion-card">
       <div class="completion-illustration-frame">
@@ -723,7 +734,7 @@ function renderWorkoutComplete() {
       </dl>
       <button id="backToTodayAfterWorkoutBtn" class="primary-action full-action" type="button">Back to Today</button>
       <button id="viewProgressFromWorkoutBtn" class="secondary-action full-action" type="button">View progress</button>
-      <p class="muted">Recheck assessment in 5 days.</p>
+      <p class="muted">${assessmentDays !== null && assessmentDays > 7 ? "Assessment check-in is due when you are ready." : "Assessment can be repeated anytime; weekly is only a guide."}</p>
     </article>
   `;
   $("#backToTodayAfterWorkoutBtn").addEventListener("click", () => {
@@ -900,7 +911,7 @@ function renderProgress(history) {
         <div class="bar-item">
           <span>${entry.score}</span>
           <div style="height:${Math.max(12, (entry.score / max) * 100)}%"></div>
-          <small>${entry.week}</small>
+          <small>${formatAssessmentPointLabel(entry.date)}</small>
         </div>
       `
     )
@@ -911,10 +922,10 @@ function renderProgress(history) {
   const baselineSteps = Number(personas[appState.id]?.wearable?.steps ?? appState.wearable.steps);
   const stepDelta = Number(appState.wearable.steps) - baselineSteps;
   const changes = [
-    ["Function score change", formatPointChange(last.score - first.score)],
-    ["TUG change", formatTimeChange(first.tugSeconds - last.tugSeconds)],
-    ["Chair-stand change", formatRepChange(last.chairStands - first.chairStands)],
-    ["Balance-stage change", formatStageChange(last.balanceStage - first.balanceStage)],
+    ["Function score", formatPointChange(last.score - first.score)],
+    ["TUG", formatTimeChange(first.tugSeconds - last.tugSeconds)],
+    ["Chair stands", formatRepChange(last.chairStands - first.chairStands)],
+    ["Balance", formatStageChange(last.balanceStage - first.balanceStage)],
     ["Steps change today", formatStepChange(stepDelta)]
   ];
 
@@ -926,6 +937,8 @@ function renderProgress(history) {
 function renderProgressInsight(history, score, plan) {
   const first = history[0];
   const last = history[history.length - 1];
+  const assessmentDays = daysSinceAssessment(appState.history);
+  const comparisonLabel = formatComparisonRange(first.date, last.date);
   const scoreDelta = last.score - first.score;
   const tugGain = round1(first.tugSeconds - last.tugSeconds);
   const chairGain = last.chairStands - first.chairStands;
@@ -936,17 +949,21 @@ function renderProgressInsight(history, score, plan) {
       ? `TUG is ${formatTimeChange(tugGain).toLowerCase()}.`
       : "The score has not moved yet, so consistency matters more than progression.";
   const scoreDeltaCopy = scoreDelta === 0
-    ? "Function score is unchanged from 4 weeks ago."
-    : `Function score is ${formatPointChange(scoreDelta).toLowerCase()} than 4 weeks ago.`;
+    ? `Function score is unchanged ${comparisonLabel}.`
+    : `Function score is ${formatPointChange(scoreDelta).toLowerCase()} ${comparisonLabel}.`;
+  const recheckCopy = assessmentDays !== null && assessmentDays > 7
+    ? "It has been over a week since the last assessment, so do a check-in when convenient."
+    : "Weekly check-ins are suggested, but you can reassess anytime.";
 
   $("#progressInsight").innerHTML = `
     <div>
       <p class="eyebrow">What this means</p>
       <h3>${scoreDelta > 0 ? "You are improving slowly." : "Keep building consistency."}</h3>
-      <p>${progressLead} ${scoreDeltaCopy} Keep doing today's plan. Recheck next week.</p>
+      <p>${progressLead} ${scoreDeltaCopy} ${recheckCopy}</p>
       <div class="metric-rows">
         <div><span>Function score</span><strong>${score.total}</strong><small>Current score</small></div>
-        <div><span>Score change</span><strong>${formatPointChange(scoreDelta)}</strong><small>Compared with 4 weeks ago</small></div>
+        <div><span>Last assessment</span><strong>${formatLastAssessmentShort(assessmentDays)}</strong><small>${assessmentDays !== null && assessmentDays > 7 ? "Check-in suggested" : "You can update anytime"}</small></div>
+        <div><span>Score change</span><strong>${formatPointChange(scoreDelta)}</strong><small>${comparisonLabel}</small></div>
         <div><span>TUG</span><strong>${appState.assessment.tugSeconds}s</strong><small>Current timed walk</small></div>
         <div><span>Chair stands</span><strong>${appState.assessment.chairStands}</strong><small>Current reps</small></div>
         <div><span>Focus</span><strong>${labelDomainTitle(weakest[0])}</strong><small>Today's priority</small></div>
@@ -1011,12 +1028,12 @@ function updateScreenHeader() {
   const firstName = appState.name.split(",")[0];
   const titleMap = {
     plan: "Today's workout",
-    progress: "This week: safer and steadier",
+    progress: "Progress over time",
     coach: "Your coach"
   };
   const subtitleMap = {
     plan: `${planShortName(score.band)} · ${workoutDuration(plan).replace("About ", "").replace("minutes", "min")}`,
-    progress: "Keep doing today's plan",
+    progress: "Last 3 months of check-ins",
     coach: "Wellness support for safe movement."
   };
   const title = titleMap[view] || `Good morning, ${firstName}`;
@@ -1199,6 +1216,44 @@ function formatTimeChange(value) {
   const rounded = round1(value);
   if (rounded === 0) return "No change";
   return `${Math.abs(rounded)}s ${rounded > 0 ? "faster" : "slower"}`;
+}
+
+function assessmentStatusCopy(days) {
+  if (days === null) return "No assessment saved yet. Do one when you are ready.";
+  if (days === 0) return "Saved today. You can update it again anytime.";
+  if (days === 1) return "Saved yesterday. Weekly is a guide, not a rule.";
+  if (days > 7) return `Last saved ${days} days ago. Do a check-in when convenient.`;
+  return `Saved ${days} days ago. Recheck weekly, or anytime function changes.`;
+}
+
+function formatLastAssessmentShort(days) {
+  if (days === null) return "None";
+  if (days === 0) return "Today";
+  if (days === 1) return "Yesterday";
+  return `${days}d ago`;
+}
+
+function formatAssessmentPointLabel(dateValue) {
+  const days = daysBetweenDateKeys(dateValue, localDateKey());
+  if (days <= 0) return "Today";
+  if (days === 1) return "1d ago";
+  return `${days}d ago`;
+}
+
+function formatComparisonRange(firstDate, lastDate) {
+  const firstDays = daysBetweenDateKeys(firstDate, localDateKey());
+  const lastDays = daysBetweenDateKeys(lastDate, localDateKey());
+  if (firstDays <= 0) return "from today's earlier check";
+  if (lastDays <= 0) return `since ${firstDays} days ago`;
+  return `since ${firstDays} days ago`;
+}
+
+function daysBetweenDateKeys(startDate, endDate) {
+  const [startYear, startMonth, startDay] = String(startDate).split("-").map(Number);
+  const [endYear, endMonth, endDay] = String(endDate).split("-").map(Number);
+  const start = new Date(startYear || 1970, (startMonth || 1) - 1, startDay || 1);
+  const end = new Date(endYear || 1970, (endMonth || 1) - 1, endDay || 1);
+  return Math.max(0, Math.round((end - start) / 86400000));
 }
 
 function round1(value) {

@@ -30,7 +30,7 @@ Show: **Today**
 
 Say:
 
-> Frailty Coach is a mobile-first wellness app for older adults who want to stay steady, strong, and independent. The daily habit is simple: open Today, understand the plan, and complete a safe guided workout. Assessments are done weekly or when mobility changes, not every day.
+> Frailty Coach is a mobile-first wellness app for older adults who want to stay steady, strong, and independent. The daily habit is simple: open Today, understand the plan, and complete a safe guided workout. Assessment is flexible: the app suggests a weekly check-in, but users can do it anytime and Progress saves each result.
 
 Point out:
 
@@ -248,7 +248,7 @@ Say instead:
 
 If the live site is slow or the workflow is updating:
 
-1. Use local app: `http://localhost:5173/?v=63`.
+1. Use local app: `http://localhost:5173/?v=65`.
 2. Start at **Today**.
 3. Avoid presenter mode unless needed.
 4. Use the saved mockups in `design/mockups/frailty-coach-v2/` as visual backup.

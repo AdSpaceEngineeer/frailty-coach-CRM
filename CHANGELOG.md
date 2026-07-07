@@ -2,11 +2,22 @@
 
 All notable product, design, and implementation changes to Frailty Coach are tracked here.
 
-This project currently uses cache-busting app URLs such as `?v=63`; those are build/demo references, not semantic release versions.
+This project currently uses cache-busting app URLs such as `?v=65`; those are build/demo references, not semantic release versions.
 
 ## Unreleased
 
 - Add future changes here before or during implementation.
+
+## 2026-07-08 - Flexible Assessment Timing
+
+### Changed
+
+- Reframed assessment as a flexible check-in: weekly is suggested, but users can save assessments anytime.
+- Added last-assessment status to Today, with a check-in prompt only when the latest assessment is over 7 days old.
+- Saving an assessment now records a dated Progress point; saving again on the same day updates that point.
+- Progress now plots dated assessment points over the last 3 months instead of fixed weekly buckets.
+- Updated Progress copy and change labels to compare against the earliest saved point in the last 3 months.
+- Bumped the running demo reference to `?v=65`.
 
 ## 2026-07-08 - Safety Copy Clarity Pass
 

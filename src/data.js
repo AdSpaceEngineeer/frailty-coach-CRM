@@ -92,10 +92,11 @@ export const personas = {
       missedSessions: 2
     },
     history: [
-      { week: "W-3", score: 31, tugSeconds: 24.2, chairStands: 3, balanceStage: 1 },
-      { week: "W-2", score: 33, tugSeconds: 23.7, chairStands: 3, balanceStage: 2 },
-      { week: "W-1", score: 35, tugSeconds: 22.9, chairStands: 4, balanceStage: 2 },
-      { week: "Now", score: 0, tugSeconds: 22.4, chairStands: 4, balanceStage: 2 }
+      { daysAgo: 28, score: 18, tugSeconds: 24.2, chairStands: 3, balanceStage: 1 },
+      { daysAgo: 20, score: 20, tugSeconds: 23.7, chairStands: 3, balanceStage: 2 },
+      { daysAgo: 14, score: 22, tugSeconds: 22.9, chairStands: 4, balanceStage: 2 },
+      { daysAgo: 7, score: 25, tugSeconds: 22.6, chairStands: 4, balanceStage: 2 },
+      { daysAgo: 2, score: 28, tugSeconds: 22.4, chairStands: 4, balanceStage: 2 }
     ]
   },
   daniel: {
@@ -144,10 +145,11 @@ export const personas = {
       missedSessions: 1
     },
     history: [
-      { week: "W-3", score: 54, tugSeconds: 14.1, chairStands: 8, balanceStage: 3 },
-      { week: "W-2", score: 57, tugSeconds: 13.5, chairStands: 9, balanceStage: 3 },
-      { week: "W-1", score: 59, tugSeconds: 13.0, chairStands: 9, balanceStage: 3 },
-      { week: "Now", score: 0, tugSeconds: 12.6, chairStands: 9, balanceStage: 3 }
+      { daysAgo: 28, score: 54, tugSeconds: 14.1, chairStands: 8, balanceStage: 3 },
+      { daysAgo: 20, score: 57, tugSeconds: 13.5, chairStands: 9, balanceStage: 3 },
+      { daysAgo: 14, score: 59, tugSeconds: 13.0, chairStands: 9, balanceStage: 3 },
+      { daysAgo: 7, score: 61, tugSeconds: 12.8, chairStands: 9, balanceStage: 3 },
+      { daysAgo: 2, score: 61, tugSeconds: 12.6, chairStands: 9, balanceStage: 3 }
     ]
   },
   mei: {
@@ -196,10 +198,11 @@ export const personas = {
       missedSessions: 0
     },
     history: [
-      { week: "W-3", score: 78, tugSeconds: 9.2, chairStands: 14, balanceStage: 4 },
-      { week: "W-2", score: 80, tugSeconds: 9.0, chairStands: 15, balanceStage: 4 },
-      { week: "W-1", score: 82, tugSeconds: 8.9, chairStands: 15, balanceStage: 4 },
-      { week: "Now", score: 0, tugSeconds: 8.7, chairStands: 15, balanceStage: 4 }
+      { daysAgo: 28, score: 78, tugSeconds: 9.2, chairStands: 14, balanceStage: 4 },
+      { daysAgo: 20, score: 80, tugSeconds: 9.0, chairStands: 15, balanceStage: 4 },
+      { daysAgo: 14, score: 82, tugSeconds: 8.9, chairStands: 15, balanceStage: 4 },
+      { daysAgo: 7, score: 86, tugSeconds: 8.8, chairStands: 15, balanceStage: 4 },
+      { daysAgo: 2, score: 93, tugSeconds: 8.7, chairStands: 15, balanceStage: 4 }
     ]
   },
   alex: {
@@ -248,10 +251,11 @@ export const personas = {
       missedSessions: 0
     },
     history: [
-      { week: "W-3", score: 88, tugSeconds: 7.2, chairStands: 21, balanceStage: 4 },
-      { week: "W-2", score: 89, tugSeconds: 7.1, chairStands: 22, balanceStage: 4 },
-      { week: "W-1", score: 91, tugSeconds: 7.0, chairStands: 22, balanceStage: 4 },
-      { week: "Now", score: 0, tugSeconds: 6.9, chairStands: 22, balanceStage: 4 }
+      { daysAgo: 28, score: 88, tugSeconds: 7.2, chairStands: 21, balanceStage: 4 },
+      { daysAgo: 20, score: 89, tugSeconds: 7.1, chairStands: 22, balanceStage: 4 },
+      { daysAgo: 14, score: 91, tugSeconds: 7.0, chairStands: 22, balanceStage: 4 },
+      { daysAgo: 7, score: 96, tugSeconds: 7.0, chairStands: 22, balanceStage: 4 },
+      { daysAgo: 2, score: 100, tugSeconds: 6.9, chairStands: 22, balanceStage: 4 }
     ]
   }
 };

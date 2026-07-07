@@ -175,7 +175,7 @@ export function isWorkoutCompleteToday(state, now = new Date()) {
   return state?.adherence?.lastWorkoutDate === localDateKey(now);
 }
 
-function localDateKey(now = new Date()) {
+export function localDateKey(now = new Date()) {
   const year = now.getFullYear();
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const day = String(now.getDate()).padStart(2, "0");
@@ -183,13 +183,108 @@ function localDateKey(now = new Date()) {
 }
 
 export function makeHistoryWithCurrent(state, scoreResult) {
-  const history = state.history.map((entry) => ({ ...entry }));
+  const history = normalizeAssessmentHistory(state.history);
   const last = history[history.length - 1];
-  last.score = scoreResult.total;
-  last.tugSeconds = state.assessment.tugSeconds;
-  last.chairStands = state.assessment.chairStands;
-  last.balanceStage = state.assessment.balanceStage;
+  if (!last) return [makeAssessmentRecord(state, scoreResult)];
+  if (Number(last.score) === 0) {
+    last.score = scoreResult.total;
+    last.tugSeconds = state.assessment.tugSeconds;
+    last.chairStands = state.assessment.chairStands;
+    last.balanceStage = state.assessment.balanceStage;
+    last.balanceSeconds = state.assessment.balanceSeconds;
+    last.gaitSpeed = state.assessment.gaitSpeed;
+  }
   return history;
+}
+
+export function recordAssessment(state, scoreResult, now = new Date()) {
+  const today = localDateKey(now);
+  const next = structuredClone(state);
+  const record = makeAssessmentRecord(next, scoreResult, today);
+  const history = normalizeAssessmentHistory(next.history, now).map((entry) =>
+    Number(entry.score) === 0 ? { ...entry, ...record, date: entry.date } : entry
+  );
+  const existingToday = history.findIndex((entry) => entry.date === today);
+
+  if (existingToday >= 0) history[existingToday] = record;
+  else history.push(record);
+
+  next.history = history
+    .filter((entry) => daysBetween(entry.date, today) <= 90)
+    .sort((a, b) => a.date.localeCompare(b.date));
+  return next;
+}
+
+export function normalizeAssessmentHistory(history = [], now = new Date()) {
+  const today = localDateKey(now);
+  return history
+    .map((entry) => normalizeHistoryEntry(entry, today))
+    .filter(Boolean)
+    .filter((entry) => daysBetween(entry.date, today) <= 90)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export function latestAssessment(history = [], now = new Date()) {
+  const normalized = normalizeAssessmentHistory(history, now);
+  return normalized[normalized.length - 1] || null;
+}
+
+export function daysSinceAssessment(history = [], now = new Date()) {
+  const last = latestAssessment(history, now);
+  if (!last) return null;
+  return daysBetween(last.date, localDateKey(now));
+}
+
+function makeAssessmentRecord(state, scoreResult, date = localDateKey()) {
+  return {
+    date,
+    score: scoreResult.total,
+    tugSeconds: state.assessment.tugSeconds,
+    chairStands: state.assessment.chairStands,
+    balanceStage: state.assessment.balanceStage,
+    balanceSeconds: state.assessment.balanceSeconds,
+    gaitSpeed: state.assessment.gaitSpeed
+  };
+}
+
+function normalizeHistoryEntry(entry, today) {
+  if (!entry) return null;
+  const date = entry.date || daysAgoToDate(Number(entry.daysAgo ?? weekLabelToDaysAgo(entry.week)), today);
+  if (!date) return null;
+  return {
+    ...entry,
+    date,
+    score: Number(entry.score || 0),
+    tugSeconds: Number(entry.tugSeconds || 0),
+    chairStands: Number(entry.chairStands || 0),
+    balanceStage: Number(entry.balanceStage || 0),
+    balanceSeconds: Number(entry.balanceSeconds || 0),
+    gaitSpeed: Number(entry.gaitSpeed || 0)
+  };
+}
+
+function weekLabelToDaysAgo(week) {
+  if (week === "Now") return 0;
+  const match = String(week || "").match(/W-(\d+)/);
+  return match ? Number(match[1]) * 7 : 0;
+}
+
+function daysAgoToDate(daysAgo, today) {
+  if (!Number.isFinite(daysAgo)) return today;
+  const date = parseLocalDate(today);
+  date.setDate(date.getDate() - daysAgo);
+  return localDateKey(date);
+}
+
+function daysBetween(startDate, endDate) {
+  const start = parseLocalDate(startDate);
+  const end = parseLocalDate(endDate);
+  return Math.round((end - start) / 86400000);
+}
+
+function parseLocalDate(value) {
+  const [year, month, day] = String(value).split("-").map(Number);
+  return new Date(year || 1970, (month || 1) - 1, day || 1);
 }
 
 export function buildCoachCopy(state, scoreResult, plan) {
