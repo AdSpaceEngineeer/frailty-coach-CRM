@@ -1,0 +1,353 @@
+:root {
+  --bg: #f4f7f6;
+  --panel: #ffffff;
+  --ink: #142321;
+  --muted: #64716d;
+  --line: #dce5e1;
+  --teal: #006252;
+  --blue: #275f89;
+  --amber: #c78121;
+  --red: #b94735;
+  --shadow: 0 16px 42px rgba(21, 39, 35, 0.11);
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+.crm-shell {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.crm-sidebar {
+  background: #0c2f2b;
+  color: white;
+  display: grid;
+  gap: 2rem;
+  grid-template-rows: auto 1fr;
+  padding: 1.25rem;
+}
+
+.brand {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.brand > span {
+  background: #fff4cf;
+  border-radius: 8px;
+  color: var(--teal);
+  display: grid;
+  font-weight: 900;
+  height: 2.7rem;
+  place-items: center;
+  width: 2.7rem;
+}
+
+.brand strong,
+.brand small {
+  display: block;
+}
+
+.brand small {
+  color: #b7d9d2;
+}
+
+.crm-sidebar nav {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+
+.crm-sidebar button {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  color: #d7eee8;
+  font-weight: 800;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.crm-sidebar button.is-active,
+.crm-sidebar button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.crm-main {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.crm-header,
+.panel,
+.metric-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.crm-header {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.eyebrow {
+  color: var(--teal);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  margin: 0 0 0.28rem;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.85rem;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.05rem;
+}
+
+.crm-header p:last-child,
+small,
+span {
+  color: var(--muted);
+}
+
+.header-actions,
+.filters {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.primary-action,
+.secondary-action,
+.filters button {
+  border-radius: 8px;
+  font-weight: 850;
+  min-height: 2.55rem;
+  padding: 0 0.8rem;
+}
+
+.primary-action {
+  background: var(--teal);
+  border: 1px solid var(--teal);
+  color: white;
+}
+
+.secondary-action,
+.filters button {
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.filters button.is-active {
+  background: #e4f4ef;
+  border-color: #b8ded3;
+  color: var(--teal);
+}
+
+.metric-grid,
+.dashboard-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.metric-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metric-card {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+}
+
+.metric-card strong {
+  color: var(--teal);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.dashboard-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+}
+
+.panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel-heading,
+.registry-toolbar {
+  align-items: start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.status-pill {
+  background: #e8f4ef;
+  border-radius: 999px;
+  color: var(--teal);
+  font-weight: 900;
+  padding: 0.35rem 0.6rem;
+}
+
+.trend-chart,
+.risk-queue,
+.resident-rows {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.trend-row,
+.risk-item,
+.resident-row {
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.trend-row {
+  grid-template-columns: 5rem minmax(0, 1fr) 3.2rem;
+}
+
+.spark-bars {
+  align-items: end;
+  background: #eef4f1;
+  border-radius: 8px;
+  display: flex;
+  gap: 0.28rem;
+  height: 4.5rem;
+  padding: 0.45rem;
+}
+
+.spark-bars span {
+  background: linear-gradient(180deg, #2f7f72, #99d0c2);
+  border-radius: 999px 999px 0 0;
+  flex: 1;
+}
+
+.trend-row em {
+  color: var(--blue);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.risk-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.risk-item span {
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.risk-item strong {
+  background: #fff1e9;
+  border-radius: 999px;
+  color: var(--red);
+  padding: 0.35rem 0.55rem;
+}
+
+.resident-row {
+  grid-template-columns: minmax(12rem, 1.5fr) repeat(5, minmax(4rem, 0.55fr)) auto;
+}
+
+.resident-row small,
+.resident-row b {
+  display: block;
+}
+
+.resident-row em {
+  background: #e8f4ef;
+  border-radius: 999px;
+  color: var(--teal);
+  font-style: normal;
+  font-weight: 900;
+  padding: 0.35rem 0.55rem;
+}
+
+.resident-row em.is-risk {
+  background: #fff1e9;
+  color: var(--red);
+}
+
+.toast {
+  background: #102f2a;
+  border-radius: 8px;
+  bottom: 1rem;
+  color: white;
+  font-weight: 850;
+  opacity: 0;
+  padding: 0.75rem 1rem;
+  position: fixed;
+  right: 1rem;
+  transform: translateY(0.4rem);
+  transition: 0.2s ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 980px) {
+  .crm-shell,
+  .dashboard-grid,
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .crm-sidebar {
+    position: static;
+  }
+
+  .crm-header,
+  .panel-heading,
+  .registry-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .resident-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
