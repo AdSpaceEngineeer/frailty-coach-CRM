@@ -358,3 +358,11 @@ This project currently uses cache-busting app URLs such as `?v=65`; those are bu
 - Added four-week progress simulation logic.
 - Added unit tests for scoring, safety routing, progress simulation, and workout completion.
 - Added service-worker and manifest support for PWA behavior.
+# Changelog
+
+## 2026-07-08 - Frailty Coach - Kampong CRM
+
+- Added standalone Kampong CRM dashboard for population, outreach, providers, and interventions.
+- Added two clickable demo journeys for team walkthroughs.
+- Reworked README, DEMO, and USER_GUIDE around the CRM product.
+- Added GitHub Pages deployment for the CRM prototype.

@@ -21,6 +21,8 @@ init();
 function init() {
   renderCrm();
   bindEvents();
+  applyHashJourney();
+  window.addEventListener("hashchange", applyHashJourney);
 }
 
 function bindEvents() {
@@ -34,6 +36,8 @@ function bindEvents() {
   $$(".crm-sidebar [data-view]").forEach((button) => {
     button.addEventListener("click", () => showView(button.dataset.view));
   });
+  $("#demoLeadBtn").addEventListener("click", () => startDemoJourney("lead"));
+  $("#demoOutreachBtn").addEventListener("click", () => startDemoJourney("outreach"));
   $("#copyBriefBtn").addEventListener("click", copyBriefing);
   $("#exportCsvBtn").addEventListener("click", exportCsv);
 }
@@ -231,6 +235,26 @@ function showView(view) {
   $("#pageTitle").textContent = copy[1];
   $("#pageSubtitle").textContent = copy[2];
   $$("[data-action-toast]").forEach((button) => button.addEventListener("click", () => toast(button.dataset.actionToast)));
+}
+
+function startDemoJourney(kind) {
+  if (kind === "lead") {
+    showView("population");
+    activeFilter = "follow-up";
+    $$(".filters button").forEach((button) => button.classList.toggle("is-active", button.dataset.filter === activeFilter));
+    renderRegistry();
+    toast("Demo 1: risk review, then provider load");
+    setTimeout(() => showView("providers"), 1200);
+    return;
+  }
+  showView("outreach");
+  toast("Demo 2: outreach queue and action logging");
+}
+
+function applyHashJourney() {
+  const hash = window.location.hash.replace("#", "");
+  if (hash === "journey-kampong-lead") startDemoJourney("lead");
+  if (hash === "journey-outreach") startDemoJourney("outreach");
 }
 
 function matchesFilter(row) {

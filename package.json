@@ -1,6 +1,8 @@
 {
-  "name": "frailty-coach",
+  "name": "frailty-coach-kampong",
   "version": "0.1.0",
+  "description": "Kampong CRM dashboard for Frailty Coach care-team operations.",
+  "homepage": "https://adspaceengineeer.github.io/frailty-coach-CRM/crm.html",
   "private": true,
   "type": "module",
   "scripts": {
