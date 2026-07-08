@@ -19,6 +19,7 @@ Frailty Coach is not a diagnostic or regulated medical-device implementation. It
 | **Secondary domains** | Care for older adults; patient engagement; preventive care and early intervention; longevity data and insights |
 | **Target users** | Older adults who want to stay steady and independent; caregivers, physiotherapists, and community health teams supporting them |
 | **Prototype URL** | https://cst-labs.github.io/frailty-coach/ |
+| **Kampong CRM URL** | https://cst-labs.github.io/frailty-coach/crm.html |
 | **Presenter mode** | https://cst-labs.github.io/frailty-coach/?demo=1 |
 | **Current status** | High-fidelity static web prototype with deterministic seeded scenarios, in-memory demo state, and GitHub Pages deployment |
 
@@ -57,6 +58,7 @@ Frailty Coach helps older adults turn frailty and fall-risk monitoring into a si
 
 ## Key Features
 
+- **Frailty Coach - Kampong CRM**: a companion operations dashboard for care networks to review population trends, outreach queues, provider caseload, and intervention tracking.
 - **Function Resilience Score**: a simple 0-100 wellness score summarizing mobility, strength, balance, activity, recovery, and fall-risk signals.
 - **Score interpretation and breakdown**: explains the 0-100 score in plain language, gives encouragement, and shows which domains are pulling the score up or down.
 - **Guided frailty and fall-risk checks**: safety screen, fall-risk questions, Timed Up and Go (TUG), chair stands, balance stage, gait speed, and measurement confidence.

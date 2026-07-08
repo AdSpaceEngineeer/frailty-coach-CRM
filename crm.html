@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frailty Coach - Kampong</title>
+    <link rel="stylesheet" href="./crm.css?v=2" />
+  </head>
+  <body>
+    <div class="crm-shell">
+      <aside class="crm-sidebar" aria-label="Kampong navigation">
+        <div class="brand">
+          <span>FC</span>
+          <div>
+            <strong>Frailty Coach</strong>
+            <small>Kampong</small>
+          </div>
+        </div>
+        <nav>
+          <button class="is-active" data-view="population" type="button">Population</button>
+          <button data-view="outreach" type="button">Outreach</button>
+          <button data-view="providers" type="button">Providers</button>
+          <button data-view="interventions" type="button">Interventions</button>
+        </nav>
+      </aside>
+
+      <main class="crm-main">
+        <header class="crm-header">
+          <div>
+            <p id="pageEyebrow" class="eyebrow">Kampong operations dashboard</p>
+            <h1 id="pageTitle">Frailty Coach - Kampong</h1>
+            <p id="pageSubtitle">Coordinate risk, adherence, outreach, and care-team follow-up across enrolled residents.</p>
+          </div>
+          <div class="header-actions">
+            <button id="demoLeadBtn" class="secondary-action" type="button">Demo 1</button>
+            <button id="demoOutreachBtn" class="secondary-action" type="button">Demo 2</button>
+            <button id="copyBriefBtn" class="secondary-action" type="button">Copy briefing</button>
+            <button id="exportCsvBtn" class="primary-action" type="button">Export CSV</button>
+          </div>
+        </header>
+
+        <section id="metricGrid" class="metric-grid" aria-label="Kampong metrics"></section>
+
+        <section id="populationView" class="view-section is-visible">
+        <div class="dashboard-grid">
+          <article class="panel trend-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Four-week trend</p>
+                <h2>Function score by resident</h2>
+              </div>
+              <span id="trendSummary" class="status-pill"></span>
+            </div>
+            <div id="trendChart" class="trend-chart"></div>
+          </article>
+
+          <article class="panel risk-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Care operations</p>
+                <h2>Priority queue</h2>
+              </div>
+            </div>
+            <div id="riskQueue" class="risk-queue"></div>
+          </article>
+        </div>
+
+        <section class="panel registry-panel">
+          <div class="registry-toolbar">
+            <div>
+              <p class="eyebrow">CRM registry</p>
+              <h2>Resident list</h2>
+            </div>
+            <div class="filters" aria-label="Registry filters">
+              <button class="is-active" data-filter="all" type="button">All</button>
+              <button data-filter="follow-up" type="button">Follow-up</button>
+              <button data-filter="due" type="button">Due</button>
+              <button data-filter="adherence" type="button">Low adherence</button>
+            </div>
+          </div>
+          <div id="residentRows" class="resident-rows"></div>
+        </section>
+        </section>
+
+        <section id="outreachView" class="view-section"></section>
+        <section id="providersView" class="view-section"></section>
+        <section id="interventionsView" class="view-section"></section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="./src/crm.js?v=2"></script>
+  </body>
+</html>

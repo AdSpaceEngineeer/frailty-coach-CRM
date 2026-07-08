@@ -1,11 +1,14 @@
-const CACHE_NAME = "frailty-coach-v65";
+const CACHE_NAME = "frailty-coach-v66";
 const ASSETS = [
   "./",
   "./index.html",
+  "./crm.html",
   "./assets/favicon.svg",
   "./styles.css?v=65",
+  "./crm.css?v=2",
   "./manifest.webmanifest",
   "./src/app.js?v=65",
+  "./src/crm.js?v=2",
   "./src/logic.js?v=65",
   "./src/data.js?v=65",
   "./assets/illustrations/coach-avatar.png",

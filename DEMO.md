@@ -16,6 +16,19 @@ Presenter mode, only if you need scenario controls:
 https://cst-labs.github.io/frailty-coach/?demo=1
 ```
 
+Kampong CRM:
+
+```text
+https://cst-labs.github.io/frailty-coach/crm.html
+```
+
+CRM demo journeys:
+
+```text
+https://cst-labs.github.io/frailty-coach/crm.html#journey-kampong-lead
+https://cst-labs.github.io/frailty-coach/crm.html#journey-outreach
+```
+
 You can also press `Shift + D` to reveal or hide presenter controls.
 
 ## Core Message
