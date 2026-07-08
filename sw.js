@@ -2,6 +2,7 @@ const CACHE_NAME = "frailty-coach-v65";
 const ASSETS = [
   "./",
   "./index.html",
+  "./assets/favicon.svg",
   "./styles.css?v=65",
   "./manifest.webmanifest",
   "./src/app.js?v=65",

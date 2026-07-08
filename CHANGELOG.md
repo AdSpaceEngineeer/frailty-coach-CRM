@@ -8,6 +8,13 @@ This project currently uses cache-busting app URLs such as `?v=65`; those are bu
 
 - Add future changes here before or during implementation.
 
+## 2026-07-08 - Local Asset Loading Fix
+
+### Fixed
+
+- Bound the local demo server to `127.0.0.1` to avoid localhost IPv4/IPv6 resolution ambiguity.
+- Added an explicit SVG favicon to avoid missing `/favicon.ico` asset noise during demo runs.
+
 ## 2026-07-08 - Hackathon README Alignment
 
 ### Changed
