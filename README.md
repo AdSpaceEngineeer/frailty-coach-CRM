@@ -1,5 +1,7 @@
 # Frailty Coach
 
+Built with OpenAI Codex as a rapid prototype for the Codex for Healthcare: From Prototype to Production hackathon.
+
 Frailty Coach is a mobile-first wellness app that helps older adults monitor physical resilience, understand frailty and fall-risk signals, and follow adaptive daily exercise plans that improve strength, balance, mobility, and confidence over time.
 
 It is built for the [Codex for Healthcare: From Prototype to Production](https://luma.com/6s8sbqep) hackathon. The submission is specifically based on the **Physical Health and Frailty** build direction under the broader **Healthy Longevity** theme. It also connects to **Care for older adults**, **Longevity data and insights**, **Preventive care and early intervention**, and **Patient engagement**.
