@@ -205,6 +205,15 @@ span {
   grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
 }
 
+.view-section {
+  display: none;
+}
+
+.view-section.is-visible {
+  display: grid;
+  gap: 1rem;
+}
+
 .panel {
   display: grid;
   gap: 1rem;
@@ -229,14 +238,20 @@ span {
 
 .trend-chart,
 .risk-queue,
-.resident-rows {
+.resident-rows,
+.action-list,
+.provider-grid,
+.intervention-table {
   display: grid;
   gap: 0.65rem;
 }
 
 .trend-row,
 .risk-item,
-.resident-row {
+.resident-row,
+.action-card,
+.provider-card,
+.intervention-table article {
   align-items: center;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -310,6 +325,61 @@ span {
   color: var(--red);
 }
 
+.action-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.action-card span,
+.provider-card span {
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.action-card button {
+  background: #e4f4ef;
+  border: 1px solid #b8ded3;
+  border-radius: 8px;
+  color: var(--teal);
+  font-weight: 900;
+  min-height: 2.4rem;
+  padding: 0 0.75rem;
+}
+
+.provider-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.provider-card dl {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.provider-card dt,
+.provider-card dd {
+  margin: 0;
+}
+
+.provider-card dd {
+  color: var(--teal);
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.intervention-table article {
+  grid-template-columns: minmax(11rem, 1fr) minmax(13rem, 1.2fr) minmax(8rem, 0.8fr) auto;
+}
+
+.intervention-table em {
+  background: #f7f0df;
+  border-radius: 999px;
+  color: var(--amber);
+  font-style: normal;
+  font-weight: 900;
+  padding: 0.35rem 0.55rem;
+}
+
 .toast {
   background: #102f2a;
   border-radius: 8px;
@@ -349,5 +419,11 @@ span {
 
   .resident-row {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .provider-grid,
+  .intervention-table article,
+  .action-card {
+    grid-template-columns: 1fr;
   }
 }

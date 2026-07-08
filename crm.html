@@ -3,33 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Frailty Coach CRM</title>
+    <title>Frailty Coach - Kampong</title>
     <link rel="stylesheet" href="./crm.css?v=1" />
   </head>
   <body>
     <div class="crm-shell">
-      <aside class="crm-sidebar" aria-label="Authority navigation">
+      <aside class="crm-sidebar" aria-label="Kampong navigation">
         <div class="brand">
           <span>FC</span>
           <div>
             <strong>Frailty Coach</strong>
-            <small>Authority CRM</small>
+            <small>Kampong</small>
           </div>
         </div>
         <nav>
-          <button class="is-active" type="button">Population</button>
-          <button type="button">Outreach</button>
-          <button type="button">Providers</button>
-          <button type="button">Reports</button>
+          <button class="is-active" data-view="population" type="button">Population</button>
+          <button data-view="outreach" type="button">Outreach</button>
+          <button data-view="providers" type="button">Providers</button>
+          <button data-view="interventions" type="button">Interventions</button>
         </nav>
       </aside>
 
       <main class="crm-main">
         <header class="crm-header">
           <div>
-            <p class="eyebrow">Healthcare authority dashboard</p>
-            <h1>Frailty population trends</h1>
-            <p>Monitor risk, adherence, and reassessment follow-up across enrolled residents.</p>
+            <p id="pageEyebrow" class="eyebrow">Kampong operations dashboard</p>
+            <h1 id="pageTitle">Frailty Coach - Kampong</h1>
+            <p id="pageSubtitle">Coordinate risk, adherence, outreach, and care-team follow-up across enrolled residents.</p>
           </div>
           <div class="header-actions">
             <button id="copyBriefBtn" class="secondary-action" type="button">Copy briefing</button>
@@ -37,9 +37,10 @@
           </div>
         </header>
 
-        <section id="metricGrid" class="metric-grid" aria-label="Population metrics"></section>
+        <section id="metricGrid" class="metric-grid" aria-label="Kampong metrics"></section>
 
-        <section class="dashboard-grid">
+        <section id="populationView" class="view-section is-visible">
+        <div class="dashboard-grid">
           <article class="panel trend-panel">
             <div class="panel-heading">
               <div>
@@ -60,7 +61,7 @@
             </div>
             <div id="riskQueue" class="risk-queue"></div>
           </article>
-        </section>
+        </div>
 
         <section class="panel registry-panel">
           <div class="registry-toolbar">
@@ -77,6 +78,11 @@
           </div>
           <div id="residentRows" class="resident-rows"></div>
         </section>
+        </section>
+
+        <section id="outreachView" class="view-section"></section>
+        <section id="providersView" class="view-section"></section>
+        <section id="interventionsView" class="view-section"></section>
       </main>
     </div>
 

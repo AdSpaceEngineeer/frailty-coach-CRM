@@ -4,6 +4,17 @@ import { computeFunctionScore, daysSinceAssessment, makeHistoryWithCurrent } fro
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 let activeFilter = "all";
+let activeView = "population";
+const providerRoster = [
+  { name: "Queenstown Polyclinic", lead: "Dr Tan", residents: ["grace", "daniel"] },
+  { name: "Bukit Merah Care Team", lead: "Nurse Lim", residents: ["mei"] },
+  { name: "Tampines Active Ageing Hub", lead: "Care Coach Ravi", residents: ["alex"] }
+];
+const interventionLog = [
+  { resident: "Grace, 84", action: "Caregiver call", owner: "Nurse Lim", status: "Due today" },
+  { resident: "Daniel, 76", action: "Balance reassessment", owner: "Dr Tan", status: "Booked" },
+  { resident: "Mei, 69", action: "Progression review", owner: "Care Coach Ravi", status: "Monitor" }
+];
 
 init();
 
@@ -20,6 +31,9 @@ function bindEvents() {
       renderRegistry();
     });
   });
+  $$(".crm-sidebar [data-view]").forEach((button) => {
+    button.addEventListener("click", () => showView(button.dataset.view));
+  });
   $("#copyBriefBtn").addEventListener("click", copyBriefing);
   $("#exportCsvBtn").addEventListener("click", exportCsv);
 }
@@ -29,6 +43,10 @@ function renderCrm() {
   renderTrendChart();
   renderRiskQueue();
   renderRegistry();
+  renderOutreach();
+  renderProviders();
+  renderInterventions();
+  showView(activeView);
 }
 
 function cohort() {
@@ -104,6 +122,115 @@ function renderRiskQueue() {
 function renderRegistry() {
   const rows = cohort().filter(matchesFilter);
   $("#residentRows").innerHTML = rows.map(residentRow).join("");
+}
+
+function renderOutreach() {
+  const rows = cohort().filter((row) => row.followUp);
+  $("#outreachView").innerHTML = `
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Outreach queue</p>
+          <h2>Who needs contact today</h2>
+        </div>
+        <span class="status-pill">${rows.length} active</span>
+      </div>
+      <div class="action-list">
+        ${rows.map(outreachCard).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function outreachCard(row) {
+  const action = row.persona.adherence.missedSessions >= 2
+    ? "Send workout nudge and ask caregiver to check barriers."
+    : row.score.status.shouldSupervise
+      ? "Call caregiver and confirm supervised setup."
+      : "Schedule function reassessment with care team.";
+  return `
+    <article class="action-card">
+      <div>
+        <strong>${row.persona.name}</strong>
+        <span>${action}</span>
+      </div>
+      <button type="button" data-action-toast="Logged outreach for ${row.persona.name}">Log action</button>
+    </article>
+  `;
+}
+
+function renderProviders() {
+  $("#providersView").innerHTML = `
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Providers</p>
+          <h2>Care-team caseload</h2>
+        </div>
+      </div>
+      <div class="provider-grid">
+        ${providerRoster.map(providerCard).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function providerCard(provider) {
+  const rows = cohort().filter((row) => provider.residents.includes(row.persona.id));
+  const highRisk = rows.filter((row) => row.followUp).length;
+  const avgScore = Math.round(rows.reduce((sum, row) => sum + row.score.total, 0) / Math.max(1, rows.length));
+  return `
+    <article class="provider-card">
+      <div>
+        <strong>${provider.name}</strong>
+        <span>${provider.lead}</span>
+      </div>
+      <dl>
+        <div><dt>Residents</dt><dd>${rows.length}</dd></div>
+        <div><dt>Avg score</dt><dd>${avgScore}</dd></div>
+        <div><dt>Follow-up</dt><dd>${highRisk}</dd></div>
+      </dl>
+    </article>
+  `;
+}
+
+function renderInterventions() {
+  $("#interventionsView").innerHTML = `
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Interventions</p>
+          <h2>Action tracking</h2>
+        </div>
+      </div>
+      <div class="intervention-table">
+        ${interventionLog.map((item) => `
+          <article>
+            <strong>${item.resident}</strong>
+            <span>${item.action}</span>
+            <b>${item.owner}</b>
+            <em>${item.status}</em>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function showView(view) {
+  activeView = view || "population";
+  $$(".crm-sidebar [data-view]").forEach((button) => button.classList.toggle("is-active", button.dataset.view === activeView));
+  $$(".view-section").forEach((section) => section.classList.toggle("is-visible", section.id === `${activeView}View`));
+  const copy = {
+    population: ["Kampong operations dashboard", "Frailty Coach - Kampong", "Coordinate risk, adherence, outreach, and care-team follow-up across enrolled residents."],
+    outreach: ["Outreach", "Today’s follow-up queue", "Turn frailty signals into calls, nudges, reassessments, and caregiver actions."],
+    providers: ["Providers", "Care-team caseload", "See which clinics, doctors, and community teams need support."],
+    interventions: ["Interventions", "Action tracking", "Track contacts, referrals, reassessments, and caregiver follow-up."]
+  }[activeView];
+  $("#pageEyebrow").textContent = copy[0];
+  $("#pageTitle").textContent = copy[1];
+  $("#pageSubtitle").textContent = copy[2];
+  $$("[data-action-toast]").forEach((button) => button.addEventListener("click", () => toast(button.dataset.actionToast)));
 }
 
 function matchesFilter(row) {
